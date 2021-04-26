@@ -12,10 +12,10 @@ public class Player {
 
 
     public Player (){
-        this.name="newPlayer";
-        this.colour="FFFFFF"; //Detta är vit i hexadecimalt
+        this.name = "newPlayer";
+        this.colour = "FFFFFF"; //Detta är vit i hexadecimalt
         this.playerId = UUID.randomUUID().toString();
-        this.score= new int[10];
-        this.penalty= new int[10];
+        this.score = new int[10];
+        this.penalty = new int[10];
     }
 }
