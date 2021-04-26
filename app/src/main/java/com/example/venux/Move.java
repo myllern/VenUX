@@ -2,6 +2,8 @@ package com.example.venux;
 
 public class Move {
 
+    //Borde man egentligen ha ArrayLists med Floats?
+    //Lite flexiblare, men vet inte hur det skulle hjälpa eller hur det påverkar prestandan.
     private float[] xAcc;
     private float[] yAcc;
     private float[] zAcc;
