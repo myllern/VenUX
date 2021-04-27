@@ -8,7 +8,7 @@ public class Game {
     private Player currentPlayer;
     private MoveList moveList;
     private Move currentMove;
-    private int numberOfRounds;
+    private int numberOfRounds; //Kanske är onödig, vet ej än
     private int currentRound;
 
     public Game(){
@@ -16,6 +16,38 @@ public class Game {
         this.moveList = new MoveList();
         this.numberOfRounds=0;
         this.currentRound=0;
+    }
+
+    private Move createNewMove(){
+        currentMove = new Move();
+        return currentMove;
+    }
+
+    private Move setMovePostions(float xRot, float yRot, float zRot){
+        currentMove.getxRotation()[0] = xRot;
+        currentMove.getxRotation()[0] = yRot;
+        currentMove.getxRotation()[0] = zRot;
+     return currentMove;
+    }
+
+    private boolean wasMoveCorrect(){
+      return currentMove.isSimpleMoveCloseEnough(moveList.getMove(currentRound));
+    }
+
+    public void recordNewMove(float xRot, float yRot, float zRot){
+        createNewMove();
+        setMovePostions(xRot, yRot, zRot);
+        moveList.addMove(currentMove);
+    }
+
+    public boolean compareMove(float xRot, float yRot, float zRot){
+        createNewMove();
+        setMovePostions(xRot, yRot, zRot);
+        return wasMoveCorrect();
+    }
+
+    public void nexRound(){
+        currentRound ++;
     }
 
 }
