@@ -9,24 +9,16 @@ public class Player {
     private String name;
     private String color; //Finns det en bättre grej? Typ Java.colour... Jag har använt string iaf
     private int playerId; //behövs kanske inte men finns här nu.
-    private int score; //Tänkte array så man kan hålla koll på varje runda, men kan vara onödigt
-    private boolean inGame;
+    private int[] score; //Tänkte array så man kan hålla koll på varje runda, men kan vara onödigt
 
 
     public Player (String name, int ID){
         this.name = name;
         this.playerId = ID;
-        this.score = 0;
-        this.inGame = true;
-
+        this.score = new int[10];
     }
 
-    public void addScore() {
-        this.score++;
-    }
-    public void playerLost(){
-        inGame = false;
-    }
+    public void addScore(int round) { this.score[round]++; }
 
     public String getName() {
         return name;
@@ -40,8 +32,16 @@ public class Player {
         return playerId;
     }
 
-    public int getScore() {
-        return score;
+    public int getScoreInRound(int round) {
+        return score[round];
+    }
+
+    public int getTotalScore(){
+        int totalScore =0;
+        for (int i = 0; i < 10; i++) {
+            totalScore += score[i];
+        }
+        return totalScore;
     }
 
     private void setColor(int ID){
@@ -59,7 +59,4 @@ public class Player {
                 this.color = "Yellow";
         }
     }
-
-
-
 }
