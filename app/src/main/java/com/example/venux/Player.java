@@ -18,4 +18,5 @@ public class Player {
         this.score = new int[10];
         this.penalty = new int[10];
     }
+
 }
