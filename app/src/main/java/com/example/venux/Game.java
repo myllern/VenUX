@@ -48,6 +48,13 @@ public class Game {
 
     public void nexRound(){
         currentRound ++;
+        if(currentRound==numberOfRounds){
+            numberOfRounds++;
+        }
+    }
+
+    public void restartRounds(){
+        currentRound = 0;
     }
 
 }
