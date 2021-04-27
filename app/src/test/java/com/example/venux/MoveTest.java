@@ -53,6 +53,5 @@ public class MoveTest {
         move2.getxRotation()[0]=3;
         move2.getxRotation()[0]=0;
         assertTrue(move1.isSimpleMoveCloseEnough(move2));
-
     }
 }
