@@ -27,11 +27,11 @@ public class Game {
         currentMove.getxRotation()[0] = xRot;
         currentMove.getxRotation()[0] = yRot;
         currentMove.getxRotation()[0] = zRot;
-     return currentMove;
+        return currentMove;
     }
 
     private boolean wasMoveCorrect(){
-      return currentMove.isSimpleMoveCloseEnough(moveList.getMove(currentRound));
+        return currentMove.isSimpleMoveCloseEnough(moveList.getMove(currentRound));
     }
 
     public void recordNewMove(float xRot, float yRot, float zRot){
