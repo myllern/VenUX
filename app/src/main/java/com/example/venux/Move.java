@@ -20,5 +20,47 @@ public class Move {
         this.zRotation = new float[1];
 
     }
+    public float[] getxRotation(){
+        return this.xRotation;
+    }
+    public float[] getyRotation(){
+        return this.yRotation;
+    }
+    public float[] getzRotation(){
+        return this.zRotation;
+    }
+    public float[] getxAcc(){
+        return this.xAcc;
+    }
+    public float[] getyAcc(){
+        return this.yAcc;
+    }
+    public float[] getzAcc(){
+        return this.zAcc;
+    }
+
+    /**
+     * Compares this move to the other move and returns false if they
+     * are too far apart in any of the rotational axis.
+     * @param otherMove - the other move you want to compare.
+     * @return true if moves are close enough, false otherwise.
+     */
+    public boolean isSimpleMoveCloseEnough(Move otherMove){
+        boolean returnValue = true;
+        int distanceValue = 3;
+        if(Math.abs(this.xRotation[0]-otherMove.getxRotation()[0])>distanceValue)
+            returnValue=false;
+        if(Math.abs(this.yRotation[0]-otherMove.getyRotation()[0])>distanceValue)
+            returnValue=false;
+        if(Math.abs(this.zRotation[0]-otherMove.getzRotation()[0])>distanceValue)
+            returnValue=false;
+
+        return returnValue;
+    }
+
+    public boolean isComplexMoveCloseEnough(Move otherMove){
+
+        return false;
+    }
 
 }
