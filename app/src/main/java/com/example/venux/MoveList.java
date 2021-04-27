@@ -17,4 +17,8 @@ public class MoveList {
     public ArrayList<Move> getMoves(){
         return moves;
     }
+
+    public Move getMove(int index){
+        return moves.get(index);
+    }
 }
