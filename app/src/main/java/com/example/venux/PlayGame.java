@@ -33,10 +33,12 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
     private Vibrator v;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
+
 
         view = findViewById(R.id.playGame_view);
         timer = new Timer();
@@ -73,10 +75,11 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
     private void changeText(){
         if(controller.isNextRoundRecorderRound()){
             toDo.setText("Rec new move!");
-
+            v.vibrate(new long[]{50, 100, 50, 100, 50},-1); //
 
         }else {
             toDo.setText("Kopy the move!");
+            v.vibrate(new long[]{50, 100, 50},-1);
 
 
 
