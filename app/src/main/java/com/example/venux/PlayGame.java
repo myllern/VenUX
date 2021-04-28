@@ -21,7 +21,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
     private TextView X,Y,Z,toDo, isMoveOk;
     private Controller controller;
     private Button btn_start;
-    private Button btn_rec;
+    private Button btn_reset;
 
 
     @Override
@@ -42,7 +42,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
         controller = new Controller();
 
         btn_start = findViewById(R.id.playGame_btn_start);
-        btn_rec = findViewById(R.id.playGame_btn_resetGame);
+        btn_reset = findViewById(R.id.playGame_btn_resetGame);
 
         btn_start.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
@@ -50,9 +50,9 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
             }
         });
 
-        btn_rec.setOnClickListener( new View.OnClickListener(){
+        btn_reset.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+                controller.resetGame();
             }
         });
 
