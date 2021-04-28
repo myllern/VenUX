@@ -34,4 +34,9 @@ public class GameTest {
         assertTrue(game.compareMove(11,12,10));
         assertFalse(game.compareMove(1,2,3));
     }
+
+    /*
+     * ToDo tests about Players, especially getNextPlayer()
+     *  extra especially if Todos in that method is implemented
+     */
 }
