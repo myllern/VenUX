@@ -26,4 +26,17 @@ public class Controller {
     public boolean isNextRoundRecorderRound(){
         return game.isNextRoundRecorderRound();
     }
+
+    public void addPlayersToGame(){
+        /*
+         * ToDo implement a way to add players to the game
+         *  needs to fix things in Game before this is possible.
+         *  See Todos in Game
+         */
+    }
+
+    /*
+     * ToDo add multiple methods to get information about players.
+     *  See Game
+     */
 }
