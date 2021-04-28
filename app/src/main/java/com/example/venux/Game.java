@@ -38,6 +38,7 @@ public class Game {
         createNewMove();
         setMovePostions(xRot, yRot, zRot);
         moveList.addMove(currentMove);
+        numberOfRounds++;
     }
 
     public boolean compareMove(float xRot, float yRot, float zRot){
