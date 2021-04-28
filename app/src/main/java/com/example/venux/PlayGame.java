@@ -42,7 +42,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
         controller = new Controller();
 
         btn_start = findViewById(R.id.playGame_btn_start);
-        btn_rec = findViewById(R.id.playGame_btn_rec);
+        btn_rec = findViewById(R.id.playGame_btn_resetGame);
 
         btn_start.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {

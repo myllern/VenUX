@@ -4,7 +4,7 @@
     <string name="instructions">Instructions</string>
     <string name="welcome_txt">Welcome to the game</string>
     <string name="playGame_btn_start">Start</string>
-    <string name="playGame_btn_rec">Rec</string>
+    <string name="playGame_btn_resetGame">RestartGame</string>
     <string name="playGame_toDo">toDo</string>
 
 </resources>

@@ -8,11 +8,11 @@
     tools:context=".PlayGame">
 
     <Button
-        android:id="@+id/playGame_btn_rec"
+        android:id="@+id/playGame_btn_resetGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="92dp"
-        android:text="@string/playGame_btn_rec"
+        android:text="@string/playGame_btn_resetGame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="@string/start"
-        app:layout_constraintBottom_toTopOf="@+id/playGame_btn_rec"
+        app:layout_constraintBottom_toTopOf="@+id/playGame_btn_resetGame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
