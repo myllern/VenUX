@@ -23,4 +23,7 @@ public class Controller {
 
     public void resetGame(){ game.resetGame(); }
 
+    public boolean isNextRoundRecorderRound(){
+        return game.isNextRoundRecorderRound();
+    }
 }

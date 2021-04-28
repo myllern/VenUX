@@ -54,6 +54,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
 
         btn_start.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
+                changeText();
                 startClick();
             }
         });
@@ -66,14 +67,17 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
 
     }
 
-
-    private void startClick(){
-        if(controller.needToRecordNewMove()){
+    private void changeText(){
+        if(controller.isNextRoundRecorderRound()){
             toDo.setText("Rec new move!");
         }else {
             toDo.setText("Kopy the move!");
         }
-        countDown();
+    }
+
+    private void startClick(){
+
+        //countDown();
         v.vibrate(50);
         if(controller.playNextRound(xVal,yVal,zVal)){
             isMoveOk.setText("Its ok!!!");

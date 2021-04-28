@@ -83,4 +83,8 @@ public class Game {
         numberOfRounds =0;
     }
 
+    public boolean isNextRoundRecorderRound(){
+        return currentRound==numberOfRounds-1;
+    }
+
 }
