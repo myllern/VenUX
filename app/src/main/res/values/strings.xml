@@ -3,4 +3,7 @@
     <string name="start">start</string>
     <string name="instructions">Instructions</string>
     <string name="welcome_txt">Welcome to the game</string>
+    <string name="playGame_btn_start">Start</string>
+    <string name="playGame_btn_rec">Rec</string>
+
 </resources>
