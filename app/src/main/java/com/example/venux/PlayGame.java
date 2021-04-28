@@ -3,6 +3,7 @@ package com.example.venux;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -21,6 +22,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private float[] mLastAccelerometer = new float[3];
+    private View view;
     float xVal, yVal, zVal;
     static final float ALPHA = 0.25f;
     private TextView X,Y,Z,toDo, isMoveOk;
@@ -36,6 +38,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
 
+        view = findViewById(R.id.playGame_view);
         timer = new Timer();
         X =  findViewById(R.id.playGame_TW_x);
         Y =  findViewById(R.id.playGame_TW_y);
@@ -70,40 +73,33 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
     private void changeText(){
         if(controller.isNextRoundRecorderRound()){
             toDo.setText("Rec new move!");
+
+
         }else {
             toDo.setText("Kopy the move!");
+
+
+
+
         }
     }
 
     private void startClick(){
 
-        //countDown();
-        v.vibrate(50);
+
         if(controller.playNextRound(xVal,yVal,zVal)){
             isMoveOk.setText("Its ok!!!");
+            v.vibrate(50);
+            view.setBackgroundColor(Color.rgb(191, 255,141)); // green
+
         }else {
             isMoveOk.setText("no, no, no.... Not ok!..");
-            v.vibrate(1000);
+            v.vibrate(2000);
+            view.setBackgroundColor(Color.rgb(255, 74,74)); // reds
+
         }
 
     };
-
-
-    public void countDown(){
-        int delay = 3000; // number of milliseconds to sleep
-
-        long start = System.currentTimeMillis();
-        while(start >= System.currentTimeMillis() - delay); // do nothing
-
-    }
-
-
-
-
-
-
-
-
 
 
     @Override
