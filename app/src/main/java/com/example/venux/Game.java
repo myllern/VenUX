@@ -87,4 +87,24 @@ public class Game {
         return currentRound==numberOfRounds-1;
     }
 
+
+    //----------------------------//
+    // Methods for players//
+
+    public void addNewPlayer(String name){
+        players.add(new Player(name));
+    }
+
+    public String getCurrentPlayerName(){
+        return currentPlayer.getName();
+    }
+
+    public String getCurrentPlayerColor(){
+        return currentPlayer.getColor();
+    }
+
+    public int getCurrentPlayerScore(){
+        return currentPlayer.getPlayerTotalScore();
+    }
+
 }
