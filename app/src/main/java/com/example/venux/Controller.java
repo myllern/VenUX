@@ -9,8 +9,8 @@ public class Controller {
     }
 
 
-    public void playNextRound(float xRot, float yRot, float zRot){
-        game.playNextRound(xRot, yRot, zRot);
+    public boolean playNextRound(float xRot, float yRot, float zRot){
+        return game.playNextRound(xRot, yRot, zRot);
     }
 
     public int getCurrentRound(){

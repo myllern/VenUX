@@ -8,6 +8,31 @@
     android:onClick="startGame"
     tools:context=".PlayerSetup">
 
+    <Button
+        android:id="@+id/playerSetup_btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:width="400dp"
+        android:height="75dp"
+        android:insetLeft="32dp"
+        android:insetRight="32dp"
+        android:onClick="startGame"
+        android:text="@string/start"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:backgroundTint="#FFFFFF"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_txt"
+        app:layout_constraintVertical_bias="0.717" />
+
     <TextView
         android:id="@+id/welcome_txt"
         android:layout_width="259dp"
@@ -24,36 +49,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/start_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:width="400dp"
-        android:height="75dp"
-        android:insetLeft="32dp"
-        android:insetRight="32dp"
-        android:text="@string/start"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:backgroundTint="#FFFFFF"
-        app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_txt"
-        app:layout_constraintVertical_bias="0.718" />
-
     <LinearLayout
         android:layout_width="378dp"
         android:layout_height="254dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/start_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcome_txt">
