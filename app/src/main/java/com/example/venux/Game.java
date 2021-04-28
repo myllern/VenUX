@@ -80,4 +80,10 @@ public class Game {
         else return compareMove(xRot, yRot, zRot);
     }
 
+    public void resetGame(){
+        moveList = new MoveList();
+        restartRounds();
+        numberOfRounds =0;
+    }
+
 }
