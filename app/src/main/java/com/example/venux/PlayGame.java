@@ -67,10 +67,13 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
         btn_reset.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
                 controller.resetGame();
+                isMoveOk.setText("Game is reset, new move!");
             }
         });
 
     }
+
+
 
     private void changeText(){
         if(controller.isNextRoundRecorderRound()){
@@ -79,11 +82,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
 
         }else {
             toDo.setText("Kopy the move!");
-            v.vibrate(new long[]{50, 100, 50},-1);
-
-
-
-
+            //v.vibrate(new long[]{50, 100, 50},-1);
         }
     }
 
@@ -92,7 +91,8 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
 
         if(controller.playNextRound(xVal,yVal,zVal)){
             isMoveOk.setText("Its ok!!!");
-            v.vibrate(50);
+            v.vibrate(new long[]{50, 100, 50, 100, 50},-1); //
+
             view.setBackgroundColor(Color.rgb(191, 255,141)); // green
 
         }else {
