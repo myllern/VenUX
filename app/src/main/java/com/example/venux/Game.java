@@ -53,9 +53,6 @@ public class Game {
 
     public int nextRound(){
         currentRound ++;
-        if(currentRound == numberOfRounds){
-            numberOfRounds++;
-        }
         return currentRound;
     }
 
