@@ -43,18 +43,39 @@ public class Game {
     public boolean compareMove(float xRot, float yRot, float zRot){
         createNewMove();
         setMovePostions(xRot, yRot, zRot);
-        return wasMoveCorrect();
+        boolean wasMoveCorrect= wasMoveCorrect();
+        if(wasMoveCorrect) nextRound();
+        else restartRounds();
+        return wasMoveCorrect;
     }
 
-    public void nexRound(){
+    public int nextRound(){
         currentRound ++;
         if(currentRound == numberOfRounds){
             numberOfRounds++;
         }
+        return currentRound;
     }
 
-    public void restartRounds(){
+    public int restartRounds(){
         currentRound = 0;
+        return currentRound;
+    }
+
+    public boolean needToRecordNewMove(){
+        return currentRound==numberOfRounds;
+    }
+
+    public int getCurrentRound(){
+        return currentRound;
+    }
+
+    public boolean playNextRound(float xRot, float yRot, float zRot){
+        if(needToRecordNewMove()){
+            recordNewMove(xRot, yRot, zRot);
+            return true;
+        }
+        else return compareMove(xRot, yRot, zRot);
     }
 
 }

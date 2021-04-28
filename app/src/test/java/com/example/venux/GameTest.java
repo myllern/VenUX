@@ -29,7 +29,7 @@ public class GameTest {
 
     @Test
     public void testRound(){
-        game.nexRound();
+        game.nextRound();
         game.recordNewMove(10,9,8); //plats 1
         assertTrue(game.compareMove(11,12,10));
         assertFalse(game.compareMove(1,2,3));
