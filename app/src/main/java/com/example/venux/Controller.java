@@ -21,6 +21,6 @@ public class Controller {
         return game.needToRecordNewMove();
     }
 
-
+    public void resetGame(){ game.resetGame(); }
 
 }
