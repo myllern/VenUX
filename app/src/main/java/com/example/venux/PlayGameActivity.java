@@ -18,7 +18,7 @@ import java.util.Timer;
 import java.util.concurrent.TimeoutException;
 
 
-public class PlayGame extends AppCompatActivity implements SensorEventListener {
+public class PlayGameActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private float[] mLastAccelerometer = new float[3];

@@ -5,7 +5,7 @@
     android:id="@+id/playGame_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlayGame">
+    tools:context=".PlayGameActivity">
 
     <Button
         android:id="@+id/playGame_btn_resetGame"

@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class PlayerSetup extends AppCompatActivity {
+public class PlayerSetupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +15,7 @@ public class PlayerSetup extends AppCompatActivity {
     }
 
     public void startGame(View view){
-        Intent playGame = new Intent(this, PlayGame.class);
+        Intent playGame = new Intent(this, PlayGameActivity.class);
         startActivity(playGame);
     };
 
