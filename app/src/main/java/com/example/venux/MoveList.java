@@ -9,4 +9,16 @@ public class MoveList {
     public MoveList(){
         this.moves = new ArrayList<Move>();
     }
+
+    public void addMove(Move move){
+        moves.add(move);
+    }
+
+    public ArrayList<Move> getMoves(){
+        return moves;
+    }
+
+    public Move getMove(int index){
+        return moves.get(index);
+    }
 }
