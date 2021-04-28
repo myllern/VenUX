@@ -25,8 +25,8 @@ public class Game {
 
     private Move setMovePostions(float xRot, float yRot, float zRot){
         currentMove.getxRotation()[0] = xRot;
-        currentMove.getxRotation()[0] = yRot;
-        currentMove.getxRotation()[0] = zRot;
+        currentMove.getyRotation()[0] = yRot;
+        currentMove.getzRotation()[0] = zRot;
      return currentMove;
     }
 
@@ -48,7 +48,7 @@ public class Game {
 
     public void nexRound(){
         currentRound ++;
-        if(currentRound==numberOfRounds){
+        if(currentRound == numberOfRounds){
             numberOfRounds++;
         }
     }

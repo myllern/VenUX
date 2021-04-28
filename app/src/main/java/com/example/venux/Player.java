@@ -36,7 +36,7 @@ public class Player {
         return score[round];
     }
 
-    public int getTotalScore(){
+    public int getPlayerTotalScore(){
         int totalScore =0;
         for (int i = 0; i < 10; i++) {
             totalScore += score[i];
