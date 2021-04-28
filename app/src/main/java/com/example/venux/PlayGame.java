@@ -18,7 +18,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
     private float[] mLastAccelerometer = new float[3];
     float xVal, yVal, zVal;
     static final float ALPHA = 0.25f;
-    private TextView X,Y,Z,toDo;
+    private TextView X,Y,Z,toDo, isMoveOk;
     private Controller controller;
     private Button btn_start;
     private Button btn_rec;
@@ -33,6 +33,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
         Y =  findViewById(R.id.playGame_TW_y);
         Z =  findViewById(R.id.playGame_TW_z);
         toDo = findViewById(R.id.playGame_TW_toDo);
+        isMoveOk = findViewById(R.id.playGame_TW_isMoveOk);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -64,8 +65,14 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
         }else {
             toDo.setText("Kopy the move!");
         }
+
         //toDo gör en Timeout
-        controller.playNextRound(xVal,yVal,zVal);
+
+        if(controller.playNextRound(xVal,yVal,zVal)){
+            isMoveOk.setText("Its ok!!!");
+        }else {
+            isMoveOk.setText("no, no, no.... Not ok!..");
+        }
 
     };
 

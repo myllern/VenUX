@@ -88,4 +88,21 @@
         app:layout_constraintTop_toBottomOf="@+id/playGame_TW_z"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/playGame_TW_isMoveOk"
+        android:layout_width="86dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="262dp"
+        android:layout_marginEnd="306dp"
+        android:layout_marginRight="306dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playGame_TW_toDo"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
