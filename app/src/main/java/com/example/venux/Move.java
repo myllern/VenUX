@@ -59,7 +59,7 @@ public class Move {
     }
 
     public boolean isComplexMoveCloseEnough(Move otherMove){
-
+        //ToDo implement method to compare moves if they have more values than one. Low priority.
         return false;
     }
 

@@ -17,6 +17,7 @@ public class Player {
         this.playerId = UUID.randomUUID().toString();
         this.score = new int[10];
         setColor(1); //Just nu blir alla gröna men detta kan vi ändra.
+        //ToDo add life to player. Should it be a boolean or is it an amount?
     }
 
     public void addScore(int round) { this.score[round]++; }

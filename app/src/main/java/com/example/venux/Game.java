@@ -18,12 +18,16 @@ public class Game {
         this.currentRound=0;
     }
 
+    public void startGame(){
+        //ToDo set currentPlayer to first Player in list players
+    }
+
     private Move createNewMove(){
         currentMove = new Move();
         return currentMove;
     }
 
-    private Move setMovePostions(float xRot, float yRot, float zRot){
+    private Move setMovePositions(float xRot, float yRot, float zRot){
         currentMove.getxRotation()[0] = xRot;
         currentMove.getyRotation()[0] = yRot;
         currentMove.getzRotation()[0] = zRot;
@@ -36,18 +40,21 @@ public class Game {
 
     public void recordNewMove(float xRot, float yRot, float zRot){
         createNewMove();
-        setMovePostions(xRot, yRot, zRot);
+        setMovePositions(xRot, yRot, zRot);
         moveList.addMove(currentMove);
         numberOfRounds++;
         currentRound =0;
+        //ToDo should we change player here(after a new move is recorded)? yes?
     }
 
     public boolean compareMove(float xRot, float yRot, float zRot){
         createNewMove();
-        setMovePostions(xRot, yRot, zRot);
+        setMovePositions(xRot, yRot, zRot);
         boolean wasMoveCorrect= wasMoveCorrect();
         if(wasMoveCorrect) nextRound();
         else restartRounds();
+        //ToDo set currentPlayer = nextPlayer?
+        //ToDo maybe setPlayerDead somehow (method does not exist yet)
         return wasMoveCorrect;
     }
 
@@ -81,6 +88,7 @@ public class Game {
         moveList = new MoveList();
         restartRounds();
         numberOfRounds =0;
+        //ToDo perhaps reset all players? Or do we keep players?
     }
 
     public boolean isNextRoundRecorderRound(){
@@ -106,5 +114,31 @@ public class Game {
     public int getCurrentPlayerScore(){
         return currentPlayer.getPlayerTotalScore();
     }
+
+    private Player GetNextPlayer(){
+        int index = players.indexOf(currentPlayer);
+        if((index + 1) ==players.size()){
+            index = 0;
+        } else{
+            index++;
+        }
+        /* ToDo something with isPlayerDead
+         * If player is dead, go to next player
+         * Maybe foorLoop? Must have a good stop somehow
+         */
+
+        return players.get(index);
+    }
+
+    private boolean isPlayerDead(){
+        /*
+        * ToDo implement check for isPlayerDead
+        * Then maybe add an attribute+methods in Player for life or something?
+        * should that be a boolean, or do we have an amount of lives?
+        */
+        return true;
+    }
+
+
 
 }
