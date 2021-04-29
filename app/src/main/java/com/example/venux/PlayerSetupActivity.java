@@ -19,4 +19,9 @@ public class PlayerSetupActivity extends AppCompatActivity {
         startActivity(playGame);
     };
 
+    public void goToInstructions(View view){
+        Intent intent = new Intent(this, InstructionsActivity.class);
+        startActivity(intent);
+    };
+
 }

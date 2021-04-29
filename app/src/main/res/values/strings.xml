@@ -6,5 +6,13 @@
     <string name="playGame_btn_start">Start</string>
     <string name="playGame_btn_resetGame">RestartGame</string>
     <string name="playGame_toDo">toDo</string>
+    <string name="kopy_nkopy">KOPY\nKOPY</string>
+    <string name="playerSetup_kopy_nkopy">KOPY\nKOPY</string>
+    <string name="player_1_name">"Player 1 "</string>
+    <string name="player_2_name">"Player 2 "</string>
+    <string name="playerSetup_instruction">Instruction</string>
+    <string name="kopy_kopy">KOPY KOPY</string>
+    <string name="player_1">Player 1</string>
+    <string name="player_2">Player 2</string>
 
 </resources>
