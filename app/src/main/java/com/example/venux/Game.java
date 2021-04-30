@@ -2,14 +2,14 @@ package com.example.venux;
 
 import java.util.ArrayList;
 
-public class Game {
+public abstract class Game {
 
-    private ArrayList<Player> players;
-    private Player currentPlayer;
-    private MoveList moveList;
-    private Move currentMove;
-    private int numberOfRounds;
-    private int currentRound;
+    protected ArrayList<Player> players;
+    protected Player currentPlayer;
+    protected MoveList moveList;
+    protected Move currentMove;
+    protected int numberOfRounds;
+    protected int currentRound;
 
     public Game(){
         this.players = new ArrayList<Player>();
@@ -26,7 +26,7 @@ public class Game {
      * Creates a new "empty" Move and sets it to be the currentMove
      * @return currentMove that is now "empty"
      */
-    private Move createNewMove(){
+    protected Move createNewMove(){
         currentMove = new Move();
         return currentMove;
     }
@@ -38,7 +38,7 @@ public class Game {
      * @param zRot - the zValue for the Move
      * @return the currentMove that is now updated with positions
      */
-    private Move setMovePositions(float xRot, float yRot, float zRot){
+    protected Move setMovePositions(float xRot, float yRot, float zRot){
         currentMove.getxRotation()[0] = xRot;
         currentMove.getyRotation()[0] = yRot;
         currentMove.getzRotation()[0] = zRot;
@@ -50,7 +50,7 @@ public class Game {
      * to the Move that should be Kopied this round
      * @return true if the Move was correct, false otherwise
      */
-    private boolean wasMoveCorrect(){
+    protected boolean wasMoveCorrect(){
       return currentMove.isSimpleMoveCloseEnough(moveList.getMove(currentRound));
     }
 
@@ -72,27 +72,7 @@ public class Game {
         //ToDo should we change player here(after a new move is recorded)? yes?
     }
 
-    /**
-     * Compares the Move that was done to the Move that
-     * should be compared this round.
-     * If Move was correct, move on to next Round.
-     * If Move was failing, set round to 0 again to
-     * start over with Kopying from the beginning
-     * @param xRot
-     * @param yRot
-     * @param zRot
-     * @return true if the Move was correct, otherwise false
-     */
-    public boolean compareMove(float xRot, float yRot, float zRot){
-        createNewMove();
-        setMovePositions(xRot, yRot, zRot);
-        boolean wasMoveCorrect= wasMoveCorrect();
-        if(wasMoveCorrect) nextRound();
-        else restartRounds();
-        //ToDo set currentPlayer = nextPlayer?
-        //ToDo maybe setPlayerDead somehow (method does not exist yet)
-        return wasMoveCorrect;
-    }
+
 
     /**
      * Sets currentRound to the next value.
@@ -131,26 +111,7 @@ public class Game {
         return currentRound;
     }
 
-    /**
-     * Plays next round. If we need to record a new Move,
-     * it uses the x/y/z-values to record the Move.
-     * But if we need to compare a Move, it uses the
-     * x/y/z-values to compare the Move to the Move of
-     * the currentRound instead.
-     * @param xRot - xValue of the Move inputed
-     * @param yRot - yValue of the Move inputed
-     * @param zRot - zValue of the Move inputed
-     * @return true if a Move was recorded or if the Move
-     * was correctly Kopied. If Move was not correctly Kopied
-     * it returns false.
-     */
-    public boolean playNextRound(float xRot, float yRot, float zRot){
-        if(needToRecordNewMove()){
-            recordNewMove(xRot, yRot, zRot);
-            return true;
-        }
-        else return compareMove(xRot, yRot, zRot);
-    }
+
 
     /**
      * Resets the game to have no Moves, no rounds
@@ -173,6 +134,9 @@ public class Game {
         return currentRound==numberOfRounds-1;
     }
 
+
+    public abstract boolean playNextRound(float xRot, float yRot, float zRot);
+    public abstract void readyNextRound();
 
     //----------------------------//
     // Methods for players//

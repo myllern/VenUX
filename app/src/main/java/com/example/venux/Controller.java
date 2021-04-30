@@ -5,12 +5,24 @@ public class Controller {
     private Game game;
 
     public Controller(){
-        this.game = new Game();
+
     }
 
 
+    public void createMonkeyGame(){
+       this.game = new MonkeyModeGame();
+    }
+
+    public void createLionGame(){
+        this.game = new LionModeGame();
+    }
+
     public boolean playNextRound(float xRot, float yRot, float zRot){
         return game.playNextRound(xRot, yRot, zRot);
+    }
+
+    public void readyNextRound(){
+        game.readyNextRound();
     }
 
     public int getCurrentRound(){
