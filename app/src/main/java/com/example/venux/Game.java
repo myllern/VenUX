@@ -19,7 +19,7 @@ public abstract class Game {
     }
 
     public void startGame(){
-        //ToDo set currentPlayer to first Player in list players
+        currentPlayer = players.get(0);
     }
 
     /**
@@ -69,7 +69,7 @@ public abstract class Game {
         moveList.addMove(currentMove);
         numberOfRounds++;
         currentRound =0;
-        //ToDo should we change player here(after a new move is recorded)? yes?
+        currentPlayer = getNextPlayer();
     }
 
 
@@ -178,19 +178,19 @@ public abstract class Game {
      * Gets the next Player that will play the game
      * @return - the next Player that will play the game
      */
-    private Player GetNextPlayer(){
+    protected Player getNextPlayer(){
+        Player theNextPlayer = currentPlayer;
         int index = players.indexOf(currentPlayer);
-        if((index + 1) ==players.size()){
-            index = 0;
-        } else{
-            index++;
+        for(int i = 1 ; i <= players.size(); i++){
+            int newIndex = (index+i)%players.size(); //uses modulo to be able to loop around the arraylist
+            if(!players.get(newIndex).isDead()) return players.get(newIndex);
         }
-        /* ToDo something with isPlayerDead
-         *  If player is dead, go to next player
-         *  Maybe forLoop? Must have a good stop somehow
-         */
-
+        //ToDo test this method.
         return players.get(index);
+    }
+
+    public boolean isPlayerLastPlayer(){
+        return currentPlayer==getNextPlayer();
     }
 
     /**
@@ -198,12 +198,7 @@ public abstract class Game {
      * @return - true if the Player is dead, otherwise false
      */
     private boolean isPlayerDead(){
-        /*
-        * ToDo implement check for isPlayerDead
-        *  Then maybe add an attribute + methods in Player for life or something?
-        *  should that be a boolean, or do we have an amount of lives?
-        */
-        return true;
+        return currentPlayer.isDead();
     }
 
     /**

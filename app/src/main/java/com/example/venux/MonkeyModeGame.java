@@ -16,9 +16,9 @@ public class MonkeyModeGame extends Game{
      * If Move was correct, move on to next Round.
      * If Move was failing, set round to 0 again to
      * start over with Kopying from the beginning
-     * @param xRot
-     * @param yRot
-     * @param zRot
+     * @param xRot the xValue that will be compared
+     * @param yRot the yValue that will be compared
+     * @param zRot the zValue that will be compared
      * @return true if the Move was correct, otherwise false
      */
     public boolean compareMove(float xRot, float yRot, float zRot){
@@ -26,9 +26,11 @@ public class MonkeyModeGame extends Game{
         super.setMovePositions(xRot, yRot, zRot);
         boolean wasMoveCorrect= super.wasMoveCorrect();
         if(wasMoveCorrect) nextRound();
-        else restartRounds();
-        //ToDo set currentPlayer = nextPlayer?
-        //ToDo maybe setPlayerDead somehow (method does not exist yet)
+        else {
+            restartRounds();
+            super.currentPlayer.died();
+        }
+        currentPlayer = super.getNextPlayer();
         return wasMoveCorrect;
     }
 

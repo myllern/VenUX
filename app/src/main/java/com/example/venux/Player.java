@@ -10,6 +10,7 @@ public class Player {
     private String color; //Finns det en bättre grej? Typ Java.colour... Jag har använt string iaf
     private String playerId; //behövs kanske inte men finns här nu.
     private int[] score; //Tänkte array så man kan hålla koll på varje runda, men kan vara onödigt
+    private int life;
 
 
     public Player (String name){
@@ -17,7 +18,7 @@ public class Player {
         this.playerId = UUID.randomUUID().toString();
         this.score = new int[10];
         setColor(1); //Just nu blir alla gröna men detta kan vi ändra.
-        //ToDo add life to player. Should it be a boolean or is it an amount?
+        this.life =3;
     }
 
     public void addScore(int round) { this.score[round]++; }
@@ -61,4 +62,24 @@ public class Player {
                 this.color = "Yellow";
         }
     }
+
+    public int died(){
+        this.life = this.life <= 0 ? 0 : this.life-1;
+        return this.life;
+    }
+
+    public boolean isDead(){
+        return this.life==0;
+    }
+
+    public int resetPlayerLife(){
+        this.life = 3;
+        return this.life;
+    }
+
+    public int resetPlayerLife(int amountToSet){
+        this.life = amountToSet;
+        return this.life;
+    }
+
 }
