@@ -16,9 +16,12 @@ public abstract class Game {
         this.moveList = new MoveList();
         this.numberOfRounds=0;
         this.currentRound=0;
+        startGame();
     }
 
     public void startGame(){
+        //ToDo remove line below when adding players is implemented in frontend.
+        players.add(new Player("Me"));
         currentPlayer = players.get(0);
     }
 
@@ -179,7 +182,6 @@ public abstract class Game {
      * @return - the next Player that will play the game
      */
     protected Player getNextPlayer(){
-        Player theNextPlayer = currentPlayer;
         int index = players.indexOf(currentPlayer);
         for(int i = 1 ; i <= players.size(); i++){
             int newIndex = (index+i)%players.size(); //uses modulo to be able to loop around the arraylist

@@ -28,7 +28,11 @@ public class MonkeyModeGame extends Game{
         if(wasMoveCorrect) nextRound();
         else {
             restartRounds();
-            super.currentPlayer.died();
+            /*
+             * Todo set next line to visible when players are
+             *  implemented in frontend too
+             */
+            //super.currentPlayer.died();
         }
         currentPlayer = super.getNextPlayer();
         return wasMoveCorrect;
