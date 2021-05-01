@@ -2,28 +2,30 @@ package com.example.venux;
 
 public class LionModeGame extends Game{
 
+    private boolean succededTheRound;
+
     /**
      * LionMode is the mode where you need to do the
      * right move within a certain time
      */
     public LionModeGame(){
         super();
+        this.succededTheRound = false;
     }
 
     /**
      * Compares the Move that was done to the Move that
      * should be compared this round.
-     * If Move was correct, move on to next Round.
-     * If Move was failing, set round to 0 again to
-     * start over with Kopying from the beginning
+     * Does not inherently go to the next round.
      * @param xRot
      * @param yRot
      * @param zRot
      * @return true if the Move was correct, otherwise false
      */
-    public boolean compareMove(float xRot, float yRot, float zRot){
+    private boolean compareMove(float xRot, float yRot, float zRot){
         super.setMovePositions(xRot, yRot, zRot);
-        return super.wasMoveCorrect();
+        this.succededTheRound = this.succededTheRound ? true : super.wasMoveCorrect();
+        return this.succededTheRound;
     }
 
     /**
@@ -45,9 +47,22 @@ public class LionModeGame extends Game{
             return true;
         }
         else return compareMove(xRot, yRot, zRot);
+        /*
+         * ToDo i think this method might need change, or
+         *  will at least be a part of a thread thing
+         */
     }
 
+    /**
+     * Makes the Game ready for the next round by
+     * setting currentMove to a new one and the
+     * currentRound to the next one. Also sets
+     * succededTheRound to false, because the
+     * player have not yet succeeded the round.
+     */
     public void readyNextRound(){
+        this.succededTheRound = false;
         super.createNewMove();
+        super.nextRound();
     }
 }
