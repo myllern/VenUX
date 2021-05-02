@@ -69,7 +69,7 @@
             android:padding="20dp">
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/setup_editName_player0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -79,7 +79,7 @@
                 android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/setup_add_player0_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -101,7 +101,7 @@
             android:padding="20dp">
 
             <EditText
-                android:id="@+id/editTextTextPerson2Name"
+                android:id="@+id/setup_editName_player1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -111,7 +111,7 @@
                 android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/setup_add_player1_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -122,5 +122,21 @@
                 app:cornerRadius="20dp" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/setup_showName_player0"
+        android:layout_width="150dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="229dp"
+        android:layout_marginRight="229dp"
+        android:layout_marginBottom="62dp"
+        android:text="Test_show_player0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerSetup_btn_start" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

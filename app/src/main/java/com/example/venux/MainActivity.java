@@ -14,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_start;
 
 
-        @Override
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -29,4 +31,6 @@ public class MainActivity extends AppCompatActivity {
         Intent playerSetup = new Intent(this, PlayerSetup.class);
         startActivity(playerSetup);
     }
+
+
 }

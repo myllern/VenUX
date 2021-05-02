@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 public class PlayGame extends AppCompatActivity implements SensorEventListener {
@@ -39,7 +39,7 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
-        controller = new Controller();
+        controller = new Controller(this);
 
         btn_start = findViewById(R.id.playGame_btn_start);
         btn_rec = findViewById(R.id.playGame_btn_rec);
@@ -59,6 +59,14 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
     }
 
 
+    /**
+     * Show message bottom of screen:
+     */
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
+
+
     private void startClick(){
         if(controller.needToRecordNewMove()){
             toDo.setText("Rec new move!");
@@ -75,14 +83,6 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
         }
 
     };
-
-
-
-
-
-
-
-
 
 
 
