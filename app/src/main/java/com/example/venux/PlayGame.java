@@ -34,16 +34,12 @@ public class PlayGame extends AppCompatActivity implements SensorEventListener {
         Z =  findViewById(R.id.playGame_TW_z);
         toDo = findViewById(R.id.playGame_TW_toDo);
         isMoveOk = findViewById(R.id.playGame_TW_isMoveOk);
-
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-
         controller = new Controller(this);
-
         btn_start = findViewById(R.id.playGame_btn_start);
         btn_rec = findViewById(R.id.playGame_btn_rec);
-
         btn_start.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
                 startClick();

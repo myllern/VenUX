@@ -34,10 +34,4 @@ public class Controller {
         return game.needToRecordNewMove();
     }
 
-
-
-
-
-
-
 }

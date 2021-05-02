@@ -3,17 +3,12 @@ package com.example.venux;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 public class PlayerSetup extends AppCompatActivity {
     private Controller controller;
@@ -29,7 +24,6 @@ public class PlayerSetup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_setup);
         controller = new Controller(this);
-        controller.db.resetTable();
 
         TW_edit_player0 = findViewById(R.id.setup_editName_player0);
         TW_edit_player1 = findViewById(R.id.setup_editName_player1);
@@ -60,8 +54,6 @@ public class PlayerSetup extends AppCompatActivity {
                 if (TW_edit_player1.length() != 0) {
                     addPlayer(id, name);
                     toastMessage(name + " added as Player!");
-                    tw.setText(getPlayer(1));
-
                 } else {
                     toastMessage("You must put something in the text field!");
                 }
@@ -77,26 +69,14 @@ public class PlayerSetup extends AppCompatActivity {
 
 
     public String getPlayer(int id) {
-
-        Cursor data = controller.db.getData(id);
-
-        ArrayList<String> listData = new ArrayList<>();
-        while(data.moveToNext()){
-            // Gör och adderar till lista.
-            listData.add(data.getString(1));
-        }
-        //create the list adapter and set the adapter
-
-        return(listData.get(0));
-
-
+        return controller.db.getPlayer(id);
     }
 
 
 
 
     public void addPlayer(int id, String name){
-        boolean isPlayerAdded = controller.db.addData(id, name);
+        boolean isPlayerAdded = controller.db.addPlayer(id, name);
         if(isPlayerAdded){
             toastMessage(name+ " added!");
 
