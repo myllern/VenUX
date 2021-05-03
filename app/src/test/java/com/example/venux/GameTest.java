@@ -10,6 +10,8 @@ public class GameTest {
 
     Game game;
 
+    //Todo fix this. Also make new test classes for monkey game and lion game
+
     @Before
     public void setUp() throws Exception {
         game = new Game();
@@ -34,4 +36,9 @@ public class GameTest {
         assertTrue(game.compareMove(11,12,10));
         assertFalse(game.compareMove(1,2,3));
     }
+
+    /*
+     * ToDo tests about Players, especially getNextPlayer()
+     *  extra especially if Todos in that method is implemented
+     */
 }

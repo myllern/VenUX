@@ -8,14 +8,17 @@ public class Player {
 
     private String name;
     private String color; //Finns det en bättre grej? Typ Java.colour... Jag har använt string iaf
-    private int playerId; //behövs kanske inte men finns här nu.
+    private String playerId; //behövs kanske inte men finns här nu.
     private int[] score; //Tänkte array så man kan hålla koll på varje runda, men kan vara onödigt
+    private int life;
 
 
-    public Player (String name, int ID){
+    public Player (String name){
         this.name = name;
-        this.playerId = ID;
+        this.playerId = UUID.randomUUID().toString();
         this.score = new int[10];
+        setColor(1); //Just nu blir alla gröna men detta kan vi ändra.
+        this.life =3;
     }
 
     public void addScore(int round) { this.score[round]++; }
@@ -28,7 +31,7 @@ public class Player {
         return color;
     }
 
-    public int getPlayerId() {
+    public String getPlayerId() {
         return playerId;
     }
 
@@ -44,8 +47,8 @@ public class Player {
         return totalScore;
     }
 
-    private void setColor(int ID){
-        switch(ID) {
+    private void setColor(int colour){
+        switch(colour) {
             case 1:
                 this.color = "Green";
                 break;
@@ -53,10 +56,30 @@ public class Player {
                 this.color = "Blue";
                 break;
             case 3:
-                this.color = "red";
+                this.color = "Red";
                 break;
             default:
                 this.color = "Yellow";
         }
     }
+
+    public int died(){
+        this.life = this.life <= 0 ? 0 : this.life-1;
+        return this.life;
+    }
+
+    public boolean isDead(){
+        return this.life==0;
+    }
+
+    public int resetPlayerLife(){
+        this.life = 3;
+        return this.life;
+    }
+
+    public int resetPlayerLife(int amountToSet){
+        this.life = amountToSet;
+        return this.life;
+    }
+
 }

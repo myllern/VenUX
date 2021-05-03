@@ -13,7 +13,7 @@ public class Controller {
 
 
     public Controller(){
-        this.game = new Game();
+        this.game = new MonkeyModeGame();
     }
 
     public Controller(Context context){
@@ -22,8 +22,20 @@ public class Controller {
 
     }
 
+    public void createMonkeyGame(){
+       this.game = new MonkeyModeGame();
+    }
+
+    public void createLionGame(){
+        this.game = new LionModeGame();
+    }
+
     public boolean playNextRound(float xRot, float yRot, float zRot){
         return game.playNextRound(xRot, yRot, zRot);
+    }
+
+    public void readyNextRound(){
+        game.readyNextRound();
     }
 
     public int getCurrentRound(){
@@ -40,4 +52,20 @@ public class Controller {
 
 
 
+    public boolean isNextRoundRecorderRound(){
+        return game.isNextRoundRecorderRound();
+    }
+
+    public void addPlayersToGame(){
+        /*
+         * ToDo implement a way to add players to the game
+         *  needs to fix things in Game before this is possible.
+         *  See Todos in Game
+         */
+    }
+
+    /*
+     * ToDo add multiple methods to get information about players.
+     *  See Game
+     */
 }

@@ -3,7 +3,6 @@ package com.example.venux;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,6 +22,7 @@ public class PlayerSetup extends AppCompatActivity {
 
 
 
+public class PlayerSetupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +117,11 @@ public class PlayerSetup extends AppCompatActivity {
     public void startGame(View view){
         Intent playGame = new Intent(this, PlayGame.class);
         startActivity(playGame);
+    };
+
+    public void goToInstructions(View view){
+        Intent intent = new Intent(this, InstructionsActivity.class);
+        startActivity(intent);
     };
 
 }
