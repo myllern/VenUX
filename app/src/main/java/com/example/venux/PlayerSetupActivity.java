@@ -18,6 +18,7 @@ public class PlayerSetup extends AppCompatActivity {
 
 
 
+public class PlayerSetupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +96,13 @@ public class PlayerSetup extends AppCompatActivity {
 
 
     public void startGame(View view){
-        Intent playGame = new Intent(this, PlayGame.class);
+        Intent playGame = new Intent(this, PlayGameActivity.class);
         startActivity(playGame);
+    };
+
+    public void goToInstructions(View view){
+        Intent intent = new Intent(this, InstructionsActivity.class);
+        startActivity(intent);
     };
 
 }

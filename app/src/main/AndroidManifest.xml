@@ -16,10 +16,16 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity android:name=".PlayGameActivity"
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
 
-
-
-        <activity android:name=".Instructions" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".InstructionsActivity" />
         <activity android:name=".GameStartCountdown" />
         <activity android:name=".PlayerSetup" />
         <activity android:name=".MainActivity">

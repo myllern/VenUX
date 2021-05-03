@@ -53,9 +53,6 @@ public class Game {
 
     public int nextRound(){
         currentRound ++;
-        if(currentRound == numberOfRounds){
-            numberOfRounds++;
-        }
         return currentRound;
     }
 
@@ -84,6 +81,10 @@ public class Game {
         moveList = new MoveList();
         restartRounds();
         numberOfRounds =0;
+    }
+
+    public boolean isNextRoundRecorderRound(){
+        return currentRound==numberOfRounds-1;
     }
 
 }
