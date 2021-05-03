@@ -17,7 +17,7 @@ public class Controller {
     }
 
     public Controller(Context context){
-        this.game = new Game();
+        this.game = new MonkeyModeGame();
         this.db = new DatabaseController(context);
 
     }
@@ -32,6 +32,10 @@ public class Controller {
 
     public boolean playNextRound(float xRot, float yRot, float zRot){
         return game.playNextRound(xRot, yRot, zRot);
+    }
+
+    public void resetGame(){
+        game.resetGame();
     }
 
     public void readyNextRound(){

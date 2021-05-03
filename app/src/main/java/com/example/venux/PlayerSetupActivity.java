@@ -32,7 +32,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
         TW_edit_player1 = findViewById(R.id.setup_editName_player1);
         btn_add_player0 = findViewById(R.id.setup_add_player0_btn);
         btn_add_player1 = findViewById(R.id.setup_add_player1_btn);
-        tw =findViewById(R.id.setup_showName_player0);
+        //tw =findViewById(R.id.setup_showName_player0);
 
         btn_add_player0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +57,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
                 if (TW_edit_player1.length() != 0) {
                     addPlayer(id, name);
                     toastMessage(name + " added as Player!");
-                    tw.setText(getPlayer(1));
+                    //tw.setText(getPlayer(1));
 
                 } else {
                     toastMessage("You must put something in the text field!");
@@ -73,7 +73,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
 
-    public String getPlayer(int id) {
+    /*public String getPlayer(int id) {
 
         Cursor data = controller.db.getData(id);
 
@@ -87,7 +87,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
         return(listData.get(0));
 
 
-    }
+    }*/
 
 
 
@@ -112,7 +112,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
     public void startGame(View view){
-        Intent playGame = new Intent(this, PlayGame.class);
+        Intent playGame = new Intent(this, PlayGameActivity.class);
         startActivity(playGame);
     };
 
