@@ -14,5 +14,7 @@
     <string name="kopy_kopy">KOPY KOPY</string>
     <string name="player_1">Player 1</string>
     <string name="player_2">Player 2</string>
+    <string name="ready">Ready</string>
+    <string name="get_ready">GET READY</string>
 
 </resources>

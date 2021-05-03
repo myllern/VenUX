@@ -72,6 +72,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
 
+
     /*public String getPlayer(int id) {
 
         Cursor data = controller.db.getData(id);

@@ -10,6 +10,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,12 +29,12 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     private View view;
     float xVal, yVal, zVal;
     static final float ALPHA = 0.25f;
-    private TextView X,Y,Z,toDo, isMoveOk;
+    private TextView gameInstructionsTV, playerName;
     private Controller controller;
-    private Button btn_start;
-    private Button btn_reset;
+    private Button readyButton;
     static Timer timer;
     private Vibrator v;
+    private boolean ready;
 
 
 
@@ -42,44 +43,72 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
 
-
         view = findViewById(R.id.playGame_view);
         timer = new Timer();
-
-
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-
         controller = new Controller();
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-
-        btn_start.setOnClickListener( new View.OnClickListener(){
-            public void onClick(View v) {
-                changeText();
-                startClick();
-            }
-        });
-
-        btn_reset.setOnClickListener( new View.OnClickListener(){
-            public void onClick(View v) {
-                controller.resetGame();
-                isMoveOk.setText("Game is reset, new move!");
-            }
-        });
-
+        readyButton = findViewById(R.id.activity_play_game_ready_button);
+        gameInstructionsTV = findViewById(R.id.activity_play_game_game_info);
+        playerName = findViewById(R.id.activity_play_game_player_name);
+        ready = false;
+        controller.resetGame();
     }
 
 
 
+
+    public void readyClick(View view){
+        //toDo some kind of countDown
+        readyButton.setVisibility(View.INVISIBLE);
+        gameInstructionsTV.setText("Create a MOVE");
+        ready=true;
+        //toDo startGame with threads
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        if(e.getActionMasked()==MotionEvent.ACTION_UP) {
+
+            /*
+             * ToDo everyting from here (Start)
+             *  needs to be on the beat, help by a thread
+             */
+            if(controller.needToRecordNewMove()) {
+                playerName.setTextColor(Color.parseColor("White"));
+                controller.playNextRound(xVal, yVal, zVal);
+                v.vibrate(50);
+            }
+            else{
+                boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
+
+                // instead of playerNameColour we should change background to player's colour
+                String playerNameColour =  playSuccess ? "Green" : "Red";
+                playerName.setTextColor(Color.parseColor(playerNameColour));
+
+
+                if(playSuccess) v.vibrate(50);
+                else v.vibrate(1000);
+            }
+            String instructionText = controller.needToRecordNewMove() ? "Create a Move" : "Kopy";
+            gameInstructionsTV.setText(instructionText);
+
+            //Todo until here (end)
+        }
+
+        return true;
+    }
+
+
     private void changeText(){
         if(controller.isNextRoundRecorderRound()){
-            toDo.setText("Rec new move!");
+
             v.vibrate(new long[]{50, 100, 50, 100, 50},-1); //
 
         }else {
-            toDo.setText("Kopy the move!");
+
             //v.vibrate(new long[]{50, 100, 50},-1);
         }
     }
@@ -87,13 +116,13 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     private void startClick(){
 
         if(controller.playNextRound(xVal,yVal,zVal)){
-            isMoveOk.setText("Its ok!!!");
+
             v.vibrate(new long[]{50, 100, 50, 100, 50},-1); //
 
             view.setBackgroundColor(Color.rgb(191, 255,141)); // green
 
         }else {
-            isMoveOk.setText("no, no, no.... Not ok!..");
+
             v.vibrate(2000);
             view.setBackgroundColor(Color.rgb(255, 74,74)); // reds
 
@@ -111,10 +140,6 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
             xVal = sensorEvent.values[0];
             yVal = sensorEvent.values[1];
             zVal = sensorEvent.values[2];
-
-            X.setText("X: " + Float.toString(xVal));
-            Y.setText("Y: " + Float.toString(yVal));
-            Z.setText("Z: " + Float.toString(zVal));
         }
     }
     protected float[] lowPass( float[] input, float[] output ) {

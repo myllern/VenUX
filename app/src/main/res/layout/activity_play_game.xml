@@ -6,4 +6,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/play_game_theme"
-    tools:context=".activities.PlayGameActivity"/>
+    tools:context=".activities.PlayGameActivity">
+
+
+    <TextView
+        android:id="@+id/activity_play_game_player_name"
+        android:layout_width="259dp"
+        android:layout_height="186dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:rotation="-10"
+        android:text="@string/player_1"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="72sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.621" />
+
+    <TextView
+        android:id="@+id/activity_play_game_game_info"
+        android:layout_width="259dp"
+        android:layout_height="186dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:rotation="-10"
+        android:text="@string/get_ready"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="72sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.621" />
+
+    <Button
+        android:id="@+id/activity_play_game_ready_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="100dp"
+        android:width="400dp"
+        android:height="75dp"
+        android:insetLeft="32dp"
+        android:insetRight="32dp"
+        android:onClick="readyClick"
+        android:text="@string/ready"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:backgroundTint="#FFFFFF"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
