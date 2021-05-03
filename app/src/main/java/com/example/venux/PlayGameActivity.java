@@ -58,7 +58,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         btn_start = findViewById(R.id.playGame_btn_start);
         btn_reset = findViewById(R.id.playGame_btn_resetGame);
 
-        btn_rec = findViewById(R.id.playGame_btn_rec);
+
         btn_start.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
                 changeText();
@@ -84,8 +84,6 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     }
 
 
-    private void startClick(){
-        if(controller.needToRecordNewMove()){
 
     private void changeText(){
         if(controller.isNextRoundRecorderRound()){
