@@ -14,15 +14,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class PlayerSetup extends AppCompatActivity {
+public class PlayerSetupActivity extends AppCompatActivity {
     private Controller controller;
     private Button btn_add_player0,btn_add_player1;
     private EditText TW_edit_player0,TW_edit_player1;
     private TextView tw;
 
-
-
-public class PlayerSetupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
