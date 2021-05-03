@@ -45,11 +45,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
         view = findViewById(R.id.playGame_view);
         timer = new Timer();
-        X =  findViewById(R.id.playGame_TW_x);
-        Y =  findViewById(R.id.playGame_TW_y);
-        Z =  findViewById(R.id.playGame_TW_z);
-        toDo = findViewById(R.id.playGame_TW_toDo);
-        isMoveOk = findViewById(R.id.playGame_TW_isMoveOk);
+
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -57,8 +53,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
         controller = new Controller();
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        btn_start = findViewById(R.id.playGame_btn_start);
-        btn_reset = findViewById(R.id.playGame_btn_resetGame);
+
 
         btn_start.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
@@ -90,7 +85,6 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     }
 
     private void startClick(){
-
 
         if(controller.playNextRound(xVal,yVal,zVal)){
             isMoveOk.setText("Its ok!!!");
