@@ -1,8 +1,10 @@
-package com.example.venux;
+package com.example.venux.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.venux.R;
 
 public class InstructionsActivity extends AppCompatActivity {
 

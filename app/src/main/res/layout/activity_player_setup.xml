@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_theme_bg"
     android:onClick="startGame"
-    tools:context=".PlayerSetupActivity">
+    tools:context=".activities.PlayerSetupActivity">
 
     <Button
         android:id="@+id/playerSetup_btn_start"

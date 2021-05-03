@@ -1,18 +1,17 @@
-package com.example.venux;
+package com.example.venux.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.venux.Controller;
+import com.example.venux.R;
 
 public class PlayerSetupActivity extends AppCompatActivity {
     private Controller controller;
@@ -87,7 +86,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
         return(listData.get(0));
 
 
-    }*/ 
+    }*/
 
 
 

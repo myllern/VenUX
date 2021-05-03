@@ -1,4 +1,4 @@
-package com.example.venux;
+package com.example.venux.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,9 @@ import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.venux.Controller;
+import com.example.venux.R;
 
 import java.util.Timer;
 import java.util.concurrent.TimeoutException;
