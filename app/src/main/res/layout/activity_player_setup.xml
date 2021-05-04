@@ -9,13 +9,10 @@
     tools:context=".activities.PlayerSetupActivity">
 
     <Button
-        android:id="@+id/activity_play_game_ready_button"
+        android:id="@+id/playerSetup_btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginBottom="64dp"
         android:width="400dp"
         android:height="75dp"
         android:insetLeft="32dp"
@@ -28,132 +25,13 @@
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.325" />
-
-    <TextView
-        android:id="@+id/activity_play_game_game_info"
-        android:layout_width="259dp"
-        android:layout_height="186dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:rotation="-10"
-        android:text="@string/kopy_kopy"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="72sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.621" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="350dp"
-        android:layout_height="249dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="83dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_shape"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
-            <EditText
-                android:id="@+id/setup_editName_player0"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/player_1"
-                android:inputType="textPersonName" />
-
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/setup_add_player0_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:minWidth="40dp"
-                android:minHeight="40dp"
-                app:cornerRadius="20dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="83dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_shape"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
-            <EditText
-                android:id="@+id/setup_editName_player1"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="0"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/player_2"
-                android:inputType="textPersonName" />
-
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/setup_add_player1_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:minWidth="40dp"
-                android:minHeight="40dp"
-                app:backgroundTint="#FF7043"
-                app:cornerRadius="20dp" />
-        </LinearLayout>
-    </LinearLayout>
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/playerSetup_instruction_btn"
         android:layout_width="131dp"
         android:layout_height="42dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:onClick="goToInstructions"
         android:text="@string/playerSetup_instruction"
         android:textSize="12sp"
@@ -161,6 +39,266 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_play_game_ready_button" />
+        app:layout_constraintTop_toBottomOf="@+id/playerSetup_btn_start"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="367dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/rounded_shape"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/playerSetup_btn_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/playerSetup_addPlayerField"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/add_another_player"
+            android:inputType="textPersonName" />
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/playerSetup_addPlayer_btn"
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/plus"
+            app:cornerRadius="25dp" />
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="365dp"
+        android:layout_height="430dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_shape"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp">
+
+
+            <TextView
+                android:id="@+id/playerSetup_player_1_nameTV"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_player_1"
+                android:textColor="#5C6BC0"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/playerSetup_player_1_color"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:text="@string/color_player_1"
+                app:backgroundTint="#FF0707"
+                app:cornerRadius="25dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_shape"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/playerSetup_player_2_nameTV"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_player_2"
+                android:textColor="#5C6BC0"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/playerSetup_player_2_color"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:text="@string/color_player_2"
+                app:backgroundTint="#29B6F6"
+                app:cornerRadius="25dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_shape"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/playerSetup_player_3_nameTV"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_player_3"
+                android:textColor="#5C6BC0"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/playerSetup_player_3_color"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:text="@string/color_player_3"
+                app:backgroundTint="#66BB6A"
+                app:cornerRadius="25dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_shape"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/playerSetup_player_4_nameTV"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_player_4"
+                android:textColor="#5C6BC0"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/playerSetup_player_4_color"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:text="@string/color_player_4"
+                app:backgroundTint="#FFEE58"
+                app:cornerRadius="25dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_shape"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/playerSetup_player_5_nameTV"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_player_5"
+                android:textColor="#5C6BC0"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/playerSetup_player_6_color"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:text="@string/color_player_5"
+                app:backgroundTint="#AB47BC"
+                app:cornerRadius="25dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_shape"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/playerSetup_player_6_nameTV"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_player_6"
+                android:textColor="#5C6BC0"
+                android:textSize="24sp" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:text="@string/color_player_6"
+                app:backgroundTint="#E91E63"
+                app:cornerRadius="25dp" />
+        </TableRow>
+
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
