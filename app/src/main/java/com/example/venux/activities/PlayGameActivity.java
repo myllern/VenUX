@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.venux.Controller;
+import com.example.venux.ObservableTimer;
 import com.example.venux.R;
 
 import java.util.Observable;
@@ -39,7 +40,6 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     private boolean ready;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,40 +60,37 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     }
 
 
-
-
-    public void readyClick(View view){
+    public void readyClick(View view) {
         //toDo some kind of countDown
         readyButton.setVisibility(View.INVISIBLE);
         gameInstructionsTV.setText("Create a MOVE");
-        ready=true;
-       Runnable task = new com.example.venux.Timer();
-       Thread t1 = new Thread(task);
-
+        ready = true;
+        Runnable task = new com.example.venux.Timer(this);
+        Thread t1 = new Thread(task);
+        t1.start();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if(e.getActionMasked()==MotionEvent.ACTION_UP) {
+        if (e.getActionMasked() == MotionEvent.ACTION_UP) {
 
             /*
              * ToDo everyting from here (Start)
              *  needs to be on the beat, help by a thread
              */
-            if(controller.needToRecordNewMove()) { //This runs if we record a move
+            if (controller.needToRecordNewMove()) { //This runs if we record a move
                 playerName.setTextColor(Color.parseColor("White"));
                 controller.playNextRound(xVal, yVal, zVal);
                 v.vibrate(50);
-            }
-            else{ //This runs if we Kopy a MOVE
+            } else { //This runs if we Kopy a MOVE
                 boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
 
                 // instead of playerNameColour we should change background to player's colour
-                String playerNameColour =  playSuccess ? "Green" : "Red";
+                String playerNameColour = playSuccess ? "Green" : "Red";
                 playerName.setTextColor(Color.parseColor(playerNameColour));
 
 
-                if(playSuccess) v.vibrate(50);
+                if (playSuccess) v.vibrate(50);
                 else v.vibrate(1000);
             }
 
@@ -107,49 +104,52 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     }
 
 
-    private void changeText(){
-        if(controller.isNextRoundRecorderRound()){
+    private void changeText() {
+        if (controller.isNextRoundRecorderRound()) {
 
-            v.vibrate(new long[]{50, 100, 50, 100, 50},-1); //
+            v.vibrate(new long[]{50, 100, 50, 100, 50}, -1); //
 
-        }else {
+        } else {
 
             //v.vibrate(new long[]{50, 100, 50},-1);
         }
     }
 
-    private void startClick(){
+    private void startClick() {
 
-        if(controller.playNextRound(xVal,yVal,zVal)){
+        if (controller.playNextRound(xVal, yVal, zVal)) {
 
-            v.vibrate(new long[]{50, 100, 50, 100, 50},-1); //
+            v.vibrate(new long[]{50, 100, 50, 100, 50}, -1); //
 
-            view.setBackgroundColor(Color.rgb(191, 255,141)); // green
+            view.setBackgroundColor(Color.rgb(191, 255, 141)); // green
 
-        }else {
+        } else {
 
             v.vibrate(2000);
-            view.setBackgroundColor(Color.rgb(255, 74,74)); // reds
+            view.setBackgroundColor(Color.rgb(255, 74, 74)); // reds
 
         }
 
-    };
+    }
+
+    ;
 
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
         if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            mLastAccelerometer = lowPass(sensorEvent.values.clone(),  mLastAccelerometer);
+            mLastAccelerometer = lowPass(sensorEvent.values.clone(), mLastAccelerometer);
 
             xVal = sensorEvent.values[0];
             yVal = sensorEvent.values[1];
             zVal = sensorEvent.values[2];
         }
     }
-    protected float[] lowPass( float[] input, float[] output ) {
-        if ( output == null ) return input;
-        for ( int i=0; i<input.length; i++ ) {
+
+    protected float[] lowPass(float[] input, float[] output) {
+        if (output == null) return input;
+        for (int i = 0; i < input.length; i++) {
             output[i] = output[i] + ALPHA * (input[i] - output[i]);
         }
         return output;
@@ -162,27 +162,60 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println(arg);
+        if (o instanceof com.example.venux.Timer) {
+            switch ((Integer) arg) {
+                case 0:
+                    gameInstructionsTV.setText("5...");
+                    break;
+                case 1:
+                    gameInstructionsTV.setText("4...");
+                    break;
+                case 2:
+                    gameInstructionsTV.setText("3...");
+                    break;
+                case 3:
+                    gameInstructionsTV.setText("2...");
+                    break;
+                case 4:
+                    gameInstructionsTV.setText("1...");
+                    break;
+                case 5:
+                    gameInstructionsTV.setText("KLAR");
+                    break;
+                default:
+                    gameInstructionsTV.setText("Game has completely failed. Restart app");
+                    break;
+            }
 
-        //TODO: Add functionality to check sensors.
-        if(controller.needToRecordNewMove()) { //This runs if we record a move
-            playerName.setTextColor(Color.parseColor("White"));
-            controller.playNextRound(xVal, yVal, zVal);
-            v.vibrate(50);
+            int i = (Integer) arg;
+            if (i == 5) {
+                //TODO: Starta faktiska spelet
+                System.out.println("Now 5 seconds!");
+            }
+        } else if (o instanceof ObservableTimer) {
+            /*System.out.println(arg);
+
+            //TODO: Add functionality to check sensors.
+            if (controller.needToRecordNewMove()) { //This runs if we record a move
+                playerName.setTextColor(Color.parseColor("White"));
+                controller.playNextRound(xVal, yVal, zVal);
+                v.vibrate(50);
+            } else { //This runs if we Kopy a MOVE
+                boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
+
+                // instead of playerNameColour we should change background to player's colour
+                String playerNameColour = playSuccess ? "Green" : "Red";
+                playerName.setTextColor(Color.parseColor(playerNameColour));
+
+
+                if (playSuccess) v.vibrate(50);
+                else v.vibrate(1000);
+            }
+
+            String instructionText = controller.needToRecordNewMove() ? "Create a Move" : "Kopy " + controller.getMovesLeft() + " Moves";
+            gameInstructionsTV.setText(instructionText);*/
         }
-        else{ //This runs if we Kopy a MOVE
-            boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
-
-            // instead of playerNameColour we should change background to player's colour
-            String playerNameColour =  playSuccess ? "Green" : "Red";
-            playerName.setTextColor(Color.parseColor(playerNameColour));
 
 
-            if(playSuccess) v.vibrate(50);
-            else v.vibrate(1000);
-        }
-
-        String instructionText = controller.needToRecordNewMove() ? "Create a Move" : "Kopy " + controller.getMovesLeft() + " Moves";
-        gameInstructionsTV.setText(instructionText);
     }
 }
