@@ -29,6 +29,7 @@
     <string name="color_player_4">color</string>
     <string name="color_player_5">color</string>
     <string name="color_player_6">color</string>
+    <string name="add_player">Add another player</string>
     <string name="color_player_3">color</string>
 
 </resources>

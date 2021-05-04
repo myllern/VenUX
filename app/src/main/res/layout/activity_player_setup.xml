@@ -67,7 +67,7 @@
             android:layout_weight="1"
             android:autofillHints=""
             android:ems="10"
-            android:hint="@string/add_another_player"
+            android:hint="@string/add_player"
             android:inputType="textPersonName" />
 
         <Space
