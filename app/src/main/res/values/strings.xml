@@ -14,7 +14,18 @@
     <string name="kopy_kopy">KOPY KOPY</string>
     <string name="player_1">Player 1</string>
     <string name="player_2">Player 2</string>
-    <string name="ready">Ready</string>
-    <string name="get_ready">GET READY</string>
-
+    <string name="add_another_player">Add Another Player</string>
+    <string name="plus">+</string>
+    <string name="name_player_1">Player 1</string>
+    <string name="color_player_1">Color</string>
+    <string name="color_player_6">Color</string>
+    <string name="name_player_2">Player 2</string>
+    <string name="color_player_2">Color</string>
+    <string name="name_player_3">Player 3</string>
+    <string name="color_player_3">Color</string>
+    <string name="name_player_4">Player 4</string>
+    <string name="color_player_4">Color</string>
+    <string name="name_player_5">Player 5</string>
+    <string name="color_player_5">Color</string>
+    <string name="name_player_6">Player 6</string>
 </resources>
