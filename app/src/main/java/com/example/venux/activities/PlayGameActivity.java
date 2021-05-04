@@ -10,19 +10,17 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.venux.Controller;
-import com.example.venux.ObservableTimer;
+import com.example.venux.Metronome;
 import com.example.venux.R;
 
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
-import java.util.concurrent.TimeoutException;
 
 
 public class PlayGameActivity extends AppCompatActivity implements SensorEventListener, Observer {
@@ -38,6 +36,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     static Timer timer;
     private Vibrator v;
     private boolean ready;
+
 
 
     @Override
@@ -61,78 +60,13 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
 
     public void readyClick(View view) {
-        //toDo some kind of countDown
         readyButton.setVisibility(View.INVISIBLE);
-        gameInstructionsTV.setText("Create a MOVE");
         ready = true;
-        Runnable task = new com.example.venux.Timer(this);
-        Thread t1 = new Thread(task);
-        t1.start();
+        Runnable countDown = new com.example.venux.Timer(this);
+        Thread countDownThread = new Thread(countDown);
+        countDownThread.start();
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent e) {
-        if (e.getActionMasked() == MotionEvent.ACTION_UP) {
-
-            /*
-             * ToDo everyting from here (Start)
-             *  needs to be on the beat, help by a thread
-             */
-            if (controller.needToRecordNewMove()) { //This runs if we record a move
-                playerName.setTextColor(Color.parseColor("White"));
-                controller.playNextRound(xVal, yVal, zVal);
-                v.vibrate(50);
-            } else { //This runs if we Kopy a MOVE
-                boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
-
-                // instead of playerNameColour we should change background to player's colour
-                String playerNameColour = playSuccess ? "Green" : "Red";
-                playerName.setTextColor(Color.parseColor(playerNameColour));
-
-
-                if (playSuccess) v.vibrate(50);
-                else v.vibrate(1000);
-            }
-
-            String instructionText = controller.needToRecordNewMove() ? "Create a Move" : "Kopy " + controller.getMovesLeft() + " Moves";
-            gameInstructionsTV.setText(instructionText);
-
-            //Todo until here (end)
-        }
-
-        return true;
-    }
-
-
-    private void changeText() {
-        if (controller.isNextRoundRecorderRound()) {
-
-            v.vibrate(new long[]{50, 100, 50, 100, 50}, -1); //
-
-        } else {
-
-            //v.vibrate(new long[]{50, 100, 50},-1);
-        }
-    }
-
-    private void startClick() {
-
-        if (controller.playNextRound(xVal, yVal, zVal)) {
-
-            v.vibrate(new long[]{50, 100, 50, 100, 50}, -1); //
-
-            view.setBackgroundColor(Color.rgb(191, 255, 141)); // green
-
-        } else {
-
-            v.vibrate(2000);
-            view.setBackgroundColor(Color.rgb(255, 74, 74)); // reds
-
-        }
-
-    }
-
-    ;
 
 
     @Override
@@ -162,44 +96,44 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
     @Override
     public void update(Observable o, Object arg) {
+        if(!ready) return;
         if (o instanceof com.example.venux.Timer) {
-            switch ((Integer) arg) {
-                case 0:
-                    gameInstructionsTV.setText("5...");
-                    break;
-                case 1:
-                    gameInstructionsTV.setText("4...");
-                    break;
-                case 2:
-                    gameInstructionsTV.setText("3...");
-                    break;
-                case 3:
-                    gameInstructionsTV.setText("2...");
-                    break;
-                case 4:
-                    gameInstructionsTV.setText("1...");
-                    break;
-                case 5:
-                    gameInstructionsTV.setText("KLAR");
-                    break;
-                default:
-                    gameInstructionsTV.setText("Game has completely failed. Restart app");
-                    break;
-            }
-
             int i = (Integer) arg;
-            if (i == 5) {
-                //TODO: Starta faktiska spelet
-                System.out.println("Now 5 seconds!");
+            if (i == 0) {
+                ((com.example.venux.Timer) o).stop(); //Stops the Timer from notifying
+                Runnable metronome = new com.example.venux.Metronome(this);
+                Thread gameThread = new Thread(metronome);
+                gameThread.start();
             }
-        } else if (o instanceof ObservableTimer) {
-            /*System.out.println(arg);
+            else{
+                String textToSet = controller.needToRecordNewMove() ?
+                        "Create move in " + String.valueOf(i) :
+                        "Kopy " + controller.getMovesLeft() + " Moves in " + String.valueOf(i);
+                gameInstructionsTV.setText(textToSet);
+                v.vibrate(50);
+            }
+        } else if (o instanceof Metronome) {
+            playGame((Metronome) o);
+            if(controller.needToRecordNewMove())
+            {
+                ((Metronome) o).exit();
+                setButtonVisible();
+            }
 
-            //TODO: Add functionality to check sensors.
+
+        }
+
+    }
+
+    private void playGame(Metronome metronome){
+
             if (controller.needToRecordNewMove()) { //This runs if we record a move
                 playerName.setTextColor(Color.parseColor("White"));
                 controller.playNextRound(xVal, yVal, zVal);
                 v.vibrate(50);
+                setButtonVisible();
+                ready=false;
+                metronome.exit();
             } else { //This runs if we Kopy a MOVE
                 boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
 
@@ -209,13 +143,35 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
 
                 if (playSuccess) v.vibrate(50);
-                else v.vibrate(1000);
+                else {
+                    ready=false;
+                    metronome.exit();
+                    setButtonVisible();
+                    v.vibrate(1000);
+                }
             }
 
-            String instructionText = controller.needToRecordNewMove() ? "Create a Move" : "Kopy " + controller.getMovesLeft() + " Moves";
-            gameInstructionsTV.setText(instructionText);*/
-        }
+            String instructionText = controller.needToRecordNewMove() ? "Create Move" : "Kopy " + controller.getMovesLeft() + " Moves";
+            gameInstructionsTV.setText(instructionText);
+    }
 
-
+    /**
+     * This method sets the button to visible.
+     * A Button is a View (I think), and Views can only
+     * be touched on a special thread called UiThread. Idk why.
+     * Therefore if we touch it in other threads, it crashes.
+     * runOnUiThread runs this from the UiThread and therefore
+     * it does not crash.
+     *
+     * Use this kind of thing if you need to touch other
+     * View objects also.
+     */
+    private void setButtonVisible(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                readyButton.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

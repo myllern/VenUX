@@ -3,11 +3,11 @@ package com.example.venux;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ObservableTimer extends Observable implements Runnable  {
+public class Metronome extends Observable implements Runnable  {
 
     private boolean exit = false;
 
-    public ObservableTimer(Observer observer) {
+    public Metronome(Observer observer) {
         this.addObserver(observer);
     }
 
@@ -19,7 +19,10 @@ public class ObservableTimer extends Observable implements Runnable  {
     @Override
     public void run() {
         long t0 = System.currentTimeMillis();
+        exit = false;
         while (!exit) {
+            setChanged();
+            notifyObservers("UPDATED");
             long now = System.currentTimeMillis();
 
             try {
@@ -27,7 +30,7 @@ public class ObservableTimer extends Observable implements Runnable  {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            notifyObservers("UPDATED");
+
 
         }
     }
