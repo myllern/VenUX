@@ -55,7 +55,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         gameInstructionsTV = findViewById(R.id.activity_play_game_game_info);
         playerName = findViewById(R.id.activity_play_game_player_name);
         ready = false;
-        controller.resetGame();
+        //ToDo: line below MIGHT cause trouble after multiple players are implemented. Check that.
+        controller.resetGame(); //This line might cause trouble
     }
 
 
@@ -106,6 +107,10 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 gameThread.start();
             }
             else{
+                /*
+                 * ToDo: make text for countDown prettier, maybe big,
+                 *  maybe two separate textViews. Artistic freedom Yes
+                 */
                 String textToSet = controller.needToRecordNewMove() ?
                         "Create move in " + String.valueOf(i) :
                         "Kopy " + controller.getMovesLeft() + " Moves in " + String.valueOf(i);
@@ -116,6 +121,12 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
             playGame((Metronome) o);
             if(controller.needToRecordNewMove())
             {
+                /*
+                 * ToDo: Set backgroundColour to currentPlayer's colour.
+                 *  A few things in controller needs to be fixed for this, and also possibly in
+                 *  Player Class (the colour thing right now is not really in work).
+                 *  Also see to-do below
+                 */
                 ((Metronome) o).exit();
                 setButtonVisible();
             }
@@ -126,27 +137,39 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     }
 
     private void playGame(Metronome metronome){
+        /*
+         * ToDo: Generally, maybe explore what kind of vibrations
+         *  are suitable and then change them to that. Maybe create
+         *  methods for good or bad vibrations and replace all
+         *  vibrations in this activity with those methods.
+         */
 
             if (controller.needToRecordNewMove()) { //This runs if we record a move
                 playerName.setTextColor(Color.parseColor("White"));
                 controller.playNextRound(xVal, yVal, zVal);
                 v.vibrate(50);
-                setButtonVisible();
+                setButtonVisible(); //See code below for this method if you are wondering
                 ready=false;
-                metronome.exit();
+                metronome.exit(); //Exiting metronome mode if you have copied a move
+
             } else { //This runs if we Kopy a MOVE
                 boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
 
-                // instead of playerNameColour we should change background to player's colour
+                /* ToDo:
+                 *   Instead of playerNameColour below we should change background to green or
+                 *   player's colour.
+                 *   A few things in controller needs to be fixed for this, and also possibly in
+                 *   Player Class (the colour thing right now is not really in work)
+                 *   Also see to-do above
+                 */
                 String playerNameColour = playSuccess ? "Green" : "Red";
                 playerName.setTextColor(Color.parseColor(playerNameColour));
-
 
                 if (playSuccess) v.vibrate(50);
                 else {
                     ready=false;
-                    metronome.exit();
-                    setButtonVisible();
+                    metronome.exit(); //Exiting the metronome mode if you die
+                    setButtonVisible(); //See code below for this method if you are wondering
                     v.vibrate(1000);
                 }
             }
@@ -155,6 +178,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
             gameInstructionsTV.setText(instructionText);
     }
 
+    //ToDo make a better(more correct) comment for setButtonVisible method.
     /**
      * This method sets the button to visible.
      * A Button is a View (I think), and Views can only
