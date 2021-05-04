@@ -114,7 +114,9 @@ public abstract class Game {
         return currentRound;
     }
 
-
+    public int getMovesLeft(){
+        return numberOfRounds-currentRound;
+    }
 
     /**
      * Resets the game to have no Moves, no rounds

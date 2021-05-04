@@ -80,7 +80,6 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 playerName.setTextColor(Color.parseColor("White"));
                 controller.playNextRound(xVal, yVal, zVal);
                 v.vibrate(50);
-                //ToDo set rounds to go here
             }
             else{ //This runs if we Kopy a MOVE
                 boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
@@ -89,11 +88,12 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 String playerNameColour =  playSuccess ? "Green" : "Red";
                 playerName.setTextColor(Color.parseColor(playerNameColour));
 
-                //ToDo set rounds to go here (if this is last round remove that text typ).
+
                 if(playSuccess) v.vibrate(50);
                 else v.vibrate(1000);
             }
-            String instructionText = controller.needToRecordNewMove() ? "Create a Move" : "Kopy";
+
+            String instructionText = controller.needToRecordNewMove() ? "Create a Move" : "Kopy " + controller.getMovesLeft() + " Moves";
             gameInstructionsTV.setText(instructionText);
 
             //Todo until here (end)

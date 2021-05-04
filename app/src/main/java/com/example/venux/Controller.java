@@ -50,6 +50,8 @@ public class Controller {
         return game.needToRecordNewMove();
     }
 
+    public int getMovesLeft(){ return game.getMovesLeft();}
+
 
 
 
