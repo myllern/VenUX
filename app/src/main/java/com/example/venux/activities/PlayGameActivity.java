@@ -76,19 +76,20 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
              * ToDo everyting from here (Start)
              *  needs to be on the beat, help by a thread
              */
-            if(controller.needToRecordNewMove()) {
+            if(controller.needToRecordNewMove()) { //This runs if we record a move
                 playerName.setTextColor(Color.parseColor("White"));
                 controller.playNextRound(xVal, yVal, zVal);
                 v.vibrate(50);
+                //ToDo set rounds to go here
             }
-            else{
+            else{ //This runs if we Kopy a MOVE
                 boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
 
                 // instead of playerNameColour we should change background to player's colour
                 String playerNameColour =  playSuccess ? "Green" : "Red";
                 playerName.setTextColor(Color.parseColor(playerNameColour));
 
-
+                //ToDo set rounds to go here (if this is last round remove that text typ).
                 if(playSuccess) v.vibrate(50);
                 else v.vibrate(1000);
             }
