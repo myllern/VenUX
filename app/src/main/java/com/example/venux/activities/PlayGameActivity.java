@@ -18,11 +18,13 @@ import android.widget.TextView;
 import com.example.venux.Controller;
 import com.example.venux.R;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Timer;
 import java.util.concurrent.TimeoutException;
 
 
-public class PlayGameActivity extends AppCompatActivity implements SensorEventListener {
+public class PlayGameActivity extends AppCompatActivity implements SensorEventListener, Observer {
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private float[] mLastAccelerometer = new float[3];
@@ -66,6 +68,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         gameInstructionsTV.setText("Create a MOVE");
         ready=true;
         //toDo startGame with threads
+
+        
     }
 
     @Override
@@ -154,5 +158,31 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println(arg);
+
+        //TODO: Add functionality to check sensors.
+        if(controller.needToRecordNewMove()) { //This runs if we record a move
+            playerName.setTextColor(Color.parseColor("White"));
+            controller.playNextRound(xVal, yVal, zVal);
+            v.vibrate(50);
+        }
+        else{ //This runs if we Kopy a MOVE
+            boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
+
+            // instead of playerNameColour we should change background to player's colour
+            String playerNameColour =  playSuccess ? "Green" : "Red";
+            playerName.setTextColor(Color.parseColor(playerNameColour));
+
+
+            if(playSuccess) v.vibrate(50);
+            else v.vibrate(1000);
+        }
+
+        String instructionText = controller.needToRecordNewMove() ? "Create a Move" : "Kopy " + controller.getMovesLeft() + " Moves";
+        gameInstructionsTV.setText(instructionText);
     }
 }
