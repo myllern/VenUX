@@ -67,9 +67,9 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         readyButton.setVisibility(View.INVISIBLE);
         gameInstructionsTV.setText("Create a MOVE");
         ready=true;
-        //toDo startGame with threads
+       Runnable task = new com.example.venux.Timer();
+       Thread t1 = new Thread(task);
 
-        
     }
 
     @Override
