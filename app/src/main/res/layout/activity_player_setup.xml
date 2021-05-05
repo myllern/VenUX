@@ -9,7 +9,7 @@
     tools:context=".activities.PlayerSetupActivity">
 
     <Button
-        android:id="@+id/playerSetup_btn_start"
+        android:id="@+id/activity_play_game_ready_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -39,8 +39,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerSetup_btn_start"
+        app:layout_constraintTop_toBottomOf="@+id/activity_play_game_ready_button"
         app:layout_constraintVertical_bias="0.466" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -50,15 +51,15 @@
         android:layout_marginLeft="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
         android:background="@drawable/rounded_shape"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/playerSetup_btn_start"
+        app:layout_constraintBottom_toTopOf="@+id/activity_play_game_ready_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout">
 
         <EditText
             android:id="@+id/playerSetup_addPlayerField"
@@ -87,12 +88,9 @@
         android:id="@+id/tableLayout"
         android:layout_width="365dp"
         android:layout_height="430dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -285,6 +283,7 @@
                 android:text="@string/name_player_6"
                 android:textColor="#5C6BC0"
                 android:textSize="24sp" />
+
 
             <Space
                 android:layout_width="30dp"

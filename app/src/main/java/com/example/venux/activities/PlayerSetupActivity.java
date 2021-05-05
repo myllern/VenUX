@@ -27,13 +27,13 @@ public class PlayerSetupActivity extends AppCompatActivity {
         controller = new Controller(this);
         controller.db.resetTable();
 
-        TW_edit_player0 = findViewById(R.id.setup_editName_player0);
+        /*TW_edit_player0 = findViewById(R.id.setup_editName_player0);
         TW_edit_player1 = findViewById(R.id.setup_editName_player1);
         btn_add_player0 = findViewById(R.id.setup_add_player0_btn);
-        btn_add_player1 = findViewById(R.id.setup_add_player1_btn);
+        btn_add_player1 = findViewById(R.id.setup_add_player1_btn);*/
         //tw =findViewById(R.id.setup_showName_player0);
 
-        btn_add_player0.setOnClickListener(new View.OnClickListener() {
+        /*btn_add_player0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = TW_edit_player0.getText().toString();
@@ -62,7 +62,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
                     toastMessage("You must put something in the text field!");
                 }
             }
-        });
+        });*/
     }
 
 

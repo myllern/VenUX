@@ -16,13 +16,21 @@ public abstract class Game {
         this.moveList = new MoveList();
         this.numberOfRounds=0;
         this.currentRound=0;
+
+
+        /*
+         *  ToDo: After multiple players are implemented,
+         *   remove method call startGame(); below. Instead,
+         *   call that when the start button is pressed in
+         *   playerSetupActivity
+         */
         startGame();
     }
 
     public void startGame(){
         //ToDo remove line below when adding players is implemented in frontend.
-        players.add(new Player("Me"));
-        currentPlayer = players.get(0);
+        players.add(new Player("Me")); //Remove this line
+        currentPlayer = players.get(0); //Keep this line
     }
 
     /**
@@ -152,6 +160,7 @@ public abstract class Game {
      * @param name - name of the player
      */
     public void addNewPlayer(String name){
+        //ToDo: if we should give player's colours, this is the place to do it
         players.add(new Player(name));
     }
 
@@ -179,6 +188,13 @@ public abstract class Game {
         return currentPlayer.getPlayerTotalScore();
     }
 
+    /*
+     * ToDo: implement method that removes a player
+     *  (probably based on index). Used when you need to remove
+     *  a player you accidentally added during playerSetup.
+     *  Do not remove when they died.
+     */
+
     /**
      * Gets the next Player that will play the game
      * @return - the next Player that will play the game
@@ -189,11 +205,18 @@ public abstract class Game {
             int newIndex = (index+i)%players.size(); //uses modulo to be able to loop around the arraylist
             if(!players.get(newIndex).isDead()) return players.get(newIndex);
         }
-        //ToDo test this method.
+        //ToDo test this method. I think it works but...
         return players.get(index);
     }
 
-    public boolean isPlayerLastPlayer(){
+    /**
+     * Checks wether the player is the last player alive.
+     * If it is true, it means that the player has
+     * won the game.
+     * @return true if the player is the last player alive,
+     * otherwise false
+     */
+    public boolean isPlayerLastPlayerAlive(){
         return currentPlayer==getNextPlayer();
     }
 
@@ -204,6 +227,10 @@ public abstract class Game {
     private boolean isPlayerDead(){
         return currentPlayer.isDead();
     }
+
+
+    //ToDo: create method that returns how many players are in the game currently
+
 
     /**
      * Randomizes what player will play the game.

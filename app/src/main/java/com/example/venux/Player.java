@@ -47,6 +47,7 @@ public class Player {
         return totalScore;
     }
 
+    //ToDo: this whole colour thing needs to be looked at again and changed
     private void setColor(int colour){
         switch(colour) {
             case 1:
