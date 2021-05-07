@@ -3,6 +3,7 @@ package com.example.venux.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -15,11 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.venux.Controller;
+import com.example.venux.CustomAdapter;
 import com.example.venux.R;
 
 public class PlayerSetupActivity extends AppCompatActivity {
     private Controller controller;
-    private TextView [] namesTV;
+    private RecyclerView playerRecyclerView;
+    private CustomAdapter myAdapter;
+    private EditText playerName;
 
 
     @Override
@@ -27,10 +31,11 @@ public class PlayerSetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_setup);
         controller = new Controller(this);
-        controller.db.resetTable();
-        namesTV = new TextView[6];
-
-        //   namesTV [0] = findViewById(R.id.playerSetup_player_1_nameTV);
+        playerRecyclerView = findViewById(R.id.PlayerSetupRecyclerView);
+        myAdapter = new CustomAdapter();
+        playerRecyclerView.setAdapter(myAdapter);
+        playerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        playerName = findViewById(R.id.playerSetup_addPlayerField);
     }
 
 
@@ -59,21 +64,8 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
     public void addPlayer(View view){
-
-        TextView playerName = new TextView(this);
-        //playerName.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.Layou§tParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT));
-        playerName.setText("programmatically created TextView1");
-        playerName.setBackgroundColor(0xff66ff66); // hex color 0xAARRGGBB
-        playerName.setPadding(20, 20, 20, 20);// in pixels (left, top, right, bottom)
-        constraintLayout.addView(playerName);
-
-
-        toastMessage(playerName.getText().toString());
-
-
-
-
-
+        myAdapter.addNewData(playerName.getText().toString());
+        playerName.setText("");
     }
 
 }
