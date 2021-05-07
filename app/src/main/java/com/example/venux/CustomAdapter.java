@@ -24,7 +24,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             super(view);
             // Define click listener for the ViewHolder's View
 
-            textView = (TextView) view.findViewById(R.id.textRowItem);
+            textView = (TextView) view.findViewById(R.id.textRowText);
         }
 
         public TextView getTextView() {
@@ -34,12 +34,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     /**
      * Initialize the dataset of the Adapter.
-     *
-     *
      */
     public CustomAdapter() {
         localDataSet = new ArrayList<String>();
-        localDataSet.add("Namn1");
     }
 
     // Create new views (invoked by the layout manager)
@@ -70,6 +67,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     public void addNewData(String data){
         this.localDataSet.add(data);
         notifyDataSetChanged();
+    }
+
+    public ArrayList<String> getData(){
+        return this.localDataSet;
     }
 }
 

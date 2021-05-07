@@ -49,6 +49,11 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
     public void startGame(View view){
+        /*
+         *  Todo: send all the players into the game.
+         *   Get players with
+         *       myAdapter.getData();
+         */
         Intent playGame = new Intent(this, PlayGameActivity.class);
         startActivity(playGame);
 
@@ -64,8 +69,17 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
     public void addPlayer(View view){
-        myAdapter.addNewData(playerName.getText().toString());
+        //Todo: randomize player colour
+        String newPlayerName = this.playerName.getText().toString();
+        if(newPlayerName.isEmpty()){
+            newPlayerName = "Player " + (myAdapter.getItemCount()+1);
+        }
+        myAdapter.addNewData(newPlayerName);
         playerName.setText("");
     }
+
+    //Todo: method to remove players.
+
+    //Todo: method to choose player colour.
 
 }
