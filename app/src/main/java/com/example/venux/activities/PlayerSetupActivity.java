@@ -3,6 +3,7 @@ package com.example.venux.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -60,14 +61,14 @@ public class PlayerSetupActivity extends AppCompatActivity {
     public void addPlayer(View view){
 
         TextView playerName = new TextView(this);
-        ConstraintLayout constraintLayout = findViewById(R.id.PlayerSetupConstraintLayout);
-
-        //playerName.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        //playerName.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.Layou§tParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT));
         playerName.setText("programmatically created TextView1");
         playerName.setBackgroundColor(0xff66ff66); // hex color 0xAARRGGBB
         playerName.setPadding(20, 20, 20, 20);// in pixels (left, top, right, bottom)
         constraintLayout.addView(playerName);
 
+
+        toastMessage(playerName.getText().toString());
 
 
 
