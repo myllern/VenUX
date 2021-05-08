@@ -111,6 +111,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                  * ToDo: make text for countDown prettier, maybe big,
                  *  maybe two separate textViews. Artistic freedom Yes
                  */
+
+
                 String textToSet = controller.needToRecordNewMove() ?
                         "Create move in " + String.valueOf(i) :
                         "Kopy " + controller.getMovesLeft() + " Moves in " + String.valueOf(i);
