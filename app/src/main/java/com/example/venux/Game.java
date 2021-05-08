@@ -17,19 +17,12 @@ public abstract class Game {
         this.numberOfRounds=0;
         this.currentRound=0;
 
-
-        /*
-         *  ToDo: After multiple players are implemented,
-         *   remove method call startGame(); below. Instead,
-         *   call that when the start button is pressed in
-         *   playerSetupActivity
-         */
-        startGame();
     }
 
     public void startGame(){
-        //ToDo remove line below when adding players is implemented in frontend.
-        players.add(new Player("Me")); //Remove this line
+        if(players.size()==0){
+            players.add(new Player("Player 1"));
+        }
         currentPlayer = players.get(0); //Keep this line
     }
 
@@ -162,6 +155,12 @@ public abstract class Game {
     public void addNewPlayer(String name){
         //ToDo: if we should give player's colours, this is the place to do it
         players.add(new Player(name));
+    }
+
+    public void addAllPlayers(ArrayList<String> playerNames){
+        for(String playerName : playerNames){
+            addNewPlayer(playerName);
+        }
     }
 
     /**

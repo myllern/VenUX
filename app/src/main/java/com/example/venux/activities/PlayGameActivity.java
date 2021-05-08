@@ -50,7 +50,10 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        Bundle bundle = getIntent().getExtras();
         controller = new Controller();
+        controller.addPlayersToGame(bundle.getStringArrayList("playerNames"));
+        controller.startGame();
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         readyButton = findViewById(R.id.activity_play_game_ready_button);
         gameInstructionsTV = findViewById(R.id.activity_play_game_game_info);
@@ -154,6 +157,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 setButtonVisible(); //See code below for this method if you are wondering
                 ready=false;
                 metronome.exit(); //Exiting metronome mode if you have copied a move
+                playerName.setText(controller.getCurrentPlayerName());
 
             } else { //This runs if we Kopy a MOVE
                 boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
@@ -173,6 +177,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                     playSuccessSound();
                 }
                 else {
+                    playerName.setText(controller.getCurrentPlayerName());
                     ready=false;
                     metronome.exit(); //Exiting the metronome mode if you die
                     setButtonVisible(); //See code below for this method if you are wondering
