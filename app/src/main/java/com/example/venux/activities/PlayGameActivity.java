@@ -136,10 +136,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 ((Metronome) o).exit();
                 setButtonVisible();
             }
-
-
         }
-
     }
 
     private void playGame(Metronome metronome){

@@ -66,6 +66,7 @@ public abstract class Game {
      * @param xRot - xValue of the new Move
      * @param yRot - yValue of the new Move
      * @param zRot - zValue of the new Move
+     *             ToDO: check if the move corresponds to an allowed move before adding
      */
     public void recordNewMove(float xRot, float yRot, float zRot){
         createNewMove();
