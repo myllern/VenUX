@@ -3,6 +3,8 @@ package com.example.venux;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+
 public class Controller {
 
     private Game game;
@@ -38,6 +40,10 @@ public class Controller {
         game.resetGame();
     }
 
+    public void startGame(){
+        game.startGame();
+    }
+
     public void readyNextRound(){
         game.readyNextRound();
     }
@@ -62,12 +68,12 @@ public class Controller {
         return game.isNextRoundRecorderRound();
     }
 
-    public void addPlayersToGame(){
-        /*
-         * ToDo implement a way to add players to the game
-         *  needs to fix things in Game before this is possible.
-         *  See Todos in Game
-         */
+    public void addPlayersToGame(ArrayList<String> playerNames){
+        game.addAllPlayers(playerNames);
+    }
+
+    public String getCurrentPlayerName(){
+        return game.getCurrentPlayerName();
     }
 
     /*

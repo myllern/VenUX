@@ -55,6 +55,9 @@ public class PlayerSetupActivity extends AppCompatActivity {
          *       myAdapter.getData();
          */
         Intent playGame = new Intent(this, PlayGameActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putStringArrayList("playerNames", myAdapter.getData());
+        playGame.putExtras(bundle);
         startActivity(playGame);
 
 
