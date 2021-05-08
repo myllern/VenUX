@@ -177,6 +177,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                     metronome.exit(); //Exiting the metronome mode if you die
                     setButtonVisible(); //See code below for this method if you are wondering
                     v.vibrate(1000);
+                    playFailSound();
                 }
             }
 
@@ -210,6 +211,27 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
      */
     public void playSuccessSound(){
         mediaPlayer = mediaPlayer.create(this, R.raw.correct_move_1);
+
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mediaPlayer.start();
+            }
+        });
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.release();
+            }
+        });
+
+    }
+
+    /**
+     * Plays a sound for a successful/correct move.
+     */
+    public void playFailSound(){
+        mediaPlayer = mediaPlayer.create(this, R.raw.failed_move_1);
 
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
