@@ -206,7 +206,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     }
 
     public void playSuccessSound(){
-        mediaPlayer = mediaPlayer.create(this, R.sounds.correct_move_1.mp3);
+        mediaPlayer = mediaPlayer.create(this, R.raw.correct_move_1);
 
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
