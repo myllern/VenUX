@@ -8,6 +8,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -36,7 +37,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     static Timer timer;
     private Vibrator v;
     private boolean ready;
-
+    private MediaPlayer mediaPlayer;
 
 
     @Override
@@ -167,7 +168,10 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 String playerNameColour = playSuccess ? "Green" : "Red";
                 playerName.setTextColor(Color.parseColor(playerNameColour));
 
-                if (playSuccess) v.vibrate(50);
+                if (playSuccess) {
+                    v.vibrate(50);
+                    playSuccessSound();
+                }
                 else {
                     ready=false;
                     metronome.exit(); //Exiting the metronome mode if you die
@@ -199,5 +203,23 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 readyButton.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    public void playSuccessSound(){
+        mediaPlayer = mediaPlayer.create(this, R.sounds.correct_move_1.mp3);
+
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mediaPlayer.start();
+            }
+        });
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.release();
+            }
+        });
+
     }
 }
