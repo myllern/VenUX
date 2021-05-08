@@ -8,6 +8,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -36,7 +37,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     static Timer timer;
     private Vibrator v;
     private boolean ready;
-
+    private MediaPlayer mediaPlayer;
 
 
     @Override
@@ -171,13 +172,17 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 String playerNameColour = playSuccess ? "Green" : "Red";
                 playerName.setTextColor(Color.parseColor(playerNameColour));
 
-                if (playSuccess) v.vibrate(50);
+                if (playSuccess) {
+                    v.vibrate(50);
+                    playSuccessSound();
+                }
                 else {
                     playerName.setText(controller.getCurrentPlayerName());
                     ready=false;
                     metronome.exit(); //Exiting the metronome mode if you die
                     setButtonVisible(); //See code below for this method if you are wondering
                     v.vibrate(1000);
+                    playFailSound();
                 }
             }
 
@@ -204,5 +209,47 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 readyButton.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    /**
+     * Plays a sound for a successful/correct move.
+     */
+    public void playSuccessSound(){
+        mediaPlayer = mediaPlayer.create(this, R.raw.correct_move_1);
+
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mediaPlayer.start();
+            }
+        });
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.release();
+            }
+        });
+
+    }
+
+    /**
+     * Plays a sound for a successful/correct move.
+     */
+    public void playFailSound(){
+        mediaPlayer = mediaPlayer.create(this, R.raw.failed_move_1);
+
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mediaPlayer.start();
+            }
+        });
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.release();
+            }
+        });
+
     }
 }
