@@ -21,7 +21,6 @@ public class Controller {
     public Controller(Context context){
         this.game = new MonkeyModeGame();
         this.db = new DatabaseController(context);
-
     }
 
     public void createMonkeyGame(){
@@ -57,12 +56,6 @@ public class Controller {
     }
 
     public int getMovesLeft(){ return game.getMovesLeft();}
-
-
-
-
-
-
 
     public boolean isNextRoundRecorderRound(){
         return game.isNextRoundRecorderRound();

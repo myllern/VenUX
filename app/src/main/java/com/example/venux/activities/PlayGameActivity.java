@@ -1,5 +1,6 @@
 package com.example.venux.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -10,6 +11,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -141,6 +143,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void playGame(Metronome metronome){
         /*
          * ToDo: Generally, maybe explore what kind of vibrations
@@ -148,7 +151,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
          *  methods for good or bad vibrations and replace all
          *  vibrations in this activity with those methods.
          */
-
+            background.setBackground(getDrawable(R.drawable.play_game_theme));
             if (controller.needToRecordNewMove()) { //This runs if we record a move
                 playerName.setTextColor(Color.parseColor("White"));
                 controller.playNextRound(xVal, yVal, zVal);
@@ -160,7 +163,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
             } else { //This runs if we Kopy a MOVE
                 boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
-
+                String instructionText = controller.needToRecordNewMove() ? "Create Move" : "Kopy " + controller.getMovesLeft() + " Moves";
+                gameInstructionsTV.setText(instructionText);
                 /* ToDo:
                  *   Instead of playerNameColour below we should change background to green or
                  *   player's colour.
@@ -169,22 +173,33 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                  *   Also see to-do above
                  */
                 if (playSuccess) {
-                    v.vibrate(50);
-                    playSuccessSound();
-                    background.setBackgroundColor(0xFF66BB6A);
+                    onSucess();
                 } else {
-                    playerName.setText(controller.getCurrentPlayerName());
-                    ready=false;
-                    metronome.exit(); //Exiting the metronome mode if you die
-                    setButtonVisible(); //See code below for this method if you are wondering
-                    v.vibrate(1000);
-                    background.setBackgroundColor(0xFFEF5350);
-                    playFailSound();
+                    onFailure(metronome);
                 }
             }
 
-            String instructionText = controller.needToRecordNewMove() ? "Create Move" : "Kopy " + controller.getMovesLeft() + " Moves";
-            gameInstructionsTV.setText(instructionText);
+
+    }
+
+    private void onSucess(){
+        v.vibrate(50);
+        playSuccessSound();
+        gameInstructionsTV.setText("SUCCESS");
+        background.setBackgroundColor(0xFF66BB6A);
+    }
+
+    private void onFailure(Metronome metronome){
+        playerName.setText(controller.getCurrentPlayerName());
+        ready=false;
+        metronome.exit(); //Exiting the metronome mode if you die
+        setButtonVisible(); //See code below for this method if you are wondering
+        v.vibrate(1000);
+        background.setBackgroundColor(0xFFEF5350);
+        ready=false;
+        setButtonVisible();
+        gameInstructionsTV.setText("YOU ARE OUT");
+        playFailSound();
     }
 
     //ToDo make a better(more correct) comment for setButtonVisible method.

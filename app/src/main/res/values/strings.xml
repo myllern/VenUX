@@ -32,5 +32,7 @@
     <string name="add_player">Add another player</string>
     <string name="color_player_3">color</string>
     <string name="element_text">element text</string>
+    <string name="get_ready_display">GET READY</string>
+    <string name="get_ready_Tv">READY</string>
 
 </resources>

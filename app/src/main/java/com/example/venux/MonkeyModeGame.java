@@ -22,9 +22,9 @@ public class MonkeyModeGame extends Game{
      * @return true if the Move was correct, otherwise false
      */
     public boolean compareMove(float xRot, float yRot, float zRot){
-        super.createNewMove();
-        super.setMovePositions(xRot, yRot, zRot);
-        boolean wasMoveCorrect= super.wasMoveCorrect();
+        createNewMove();
+        setMovePositions(xRot, yRot, zRot);
+        boolean wasMoveCorrect= wasMoveCorrect();
         if(wasMoveCorrect) nextRound();
         else {
             restartRounds();
@@ -35,7 +35,6 @@ public class MonkeyModeGame extends Game{
             //super.currentPlayer.died();
             currentPlayer = super.getNextPlayer();
         }
-
         return wasMoveCorrect;
     }
 
