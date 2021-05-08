@@ -205,6 +205,9 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         });
     }
 
+    /**
+     * Plays a sound for a successful/correct move.
+     */
     public void playSuccessSound(){
         mediaPlayer = mediaPlayer.create(this, R.raw.correct_move_1);
 
