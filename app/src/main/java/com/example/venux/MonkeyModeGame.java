@@ -33,8 +33,9 @@ public class MonkeyModeGame extends Game{
              *  implemented in frontend too
              */
             //super.currentPlayer.died();
+            currentPlayer = super.getNextPlayer();
         }
-        currentPlayer = super.getNextPlayer();
+
         return wasMoveCorrect;
     }
 
