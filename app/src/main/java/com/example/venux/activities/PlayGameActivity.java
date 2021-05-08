@@ -1,6 +1,7 @@
 package com.example.venux.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -32,6 +33,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     float xVal, yVal, zVal;
     static final float ALPHA = 0.25f;
     private TextView gameInstructionsTV, playerName;
+    private ConstraintLayout background;
     private Controller controller;
     private Button readyButton;
     static Timer timer;
@@ -44,8 +46,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
-
         view = findViewById(R.id.playGame_view);
+        background = findViewById(R.id.playGame_view);
         timer = new Timer();
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -57,7 +59,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         readyButton = findViewById(R.id.activity_play_game_ready_button);
         gameInstructionsTV = findViewById(R.id.activity_play_game_game_info);
-        playerName = findViewById(R.id.activity_play_game_player_name);
+        playerName = findViewById(R.id.currentPlayerTv);
         ready = false;
         //ToDo: line below MIGHT cause trouble after multiple players are implemented. Check that.
         controller.resetGame(); //This line might cause trouble
@@ -166,19 +168,17 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                  *   Player Class (the colour thing right now is not really in work)
                  *   Also see to-do above
                  */
-                String playerNameColour = playSuccess ? "Green" : "Red";
-                playerName.setTextColor(Color.parseColor(playerNameColour));
-
                 if (playSuccess) {
                     v.vibrate(50);
                     playSuccessSound();
-                }
-                else {
+                    background.setBackgroundColor(0xFF66BB6A);
+                } else {
                     playerName.setText(controller.getCurrentPlayerName());
                     ready=false;
                     metronome.exit(); //Exiting the metronome mode if you die
                     setButtonVisible(); //See code below for this method if you are wondering
                     v.vibrate(1000);
+                    background.setBackgroundColor(0xFFEF5350);
                     playFailSound();
                 }
             }

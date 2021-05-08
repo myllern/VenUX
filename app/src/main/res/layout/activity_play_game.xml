@@ -10,13 +10,12 @@
 
 
     <TextView
-        android:id="@+id/activity_play_game_player_name"
+        android:id="@+id/currentPlayerTv"
         android:layout_width="259dp"
         android:layout_height="186dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:rotation="-10"
         android:text="@string/player_1"
@@ -24,7 +23,7 @@
         android:textColor="#FFFFFF"
         android:textSize="72sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutAddPlayer"
+        app:layout_constraintBottom_toTopOf="@+id/activity_play_game_game_info"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,20 +34,18 @@
         android:layout_width="259dp"
         android:layout_height="186dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="244dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:rotation="-10"
-        android:text="GET READY"
+        android:text="@string/get_ready"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="50sp"
         android:textStyle="bold|italic"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.621" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/activity_play_game_ready_button"
@@ -64,7 +61,7 @@
         android:insetLeft="32dp"
         android:insetRight="32dp"
         android:onClick="readyClick"
-        android:text="READY"
+        android:text="@string/get_ready_Tv"
         android:textColor="#000000"
         android:textSize="24sp"
         app:backgroundTint="#FFFFFF"
