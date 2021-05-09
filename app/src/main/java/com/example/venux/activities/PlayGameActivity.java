@@ -103,6 +103,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void update(Observable o, Object arg) {
         if(!ready) return;
