@@ -1,12 +1,14 @@
-package com.example.venux;
+package com.example.venux.model;
 
-public class MonkeyModeGame extends Game{
+import com.example.venux.model.Game;
+
+public class MonkeyModeGame extends Game {
 
     /**
      * MonkeyMode is the mode where you need to do
      * the right move on a beat
      */
-    public MonkeyModeGame(){
+    public MonkeyModeGame() {
         super();
     }
 
@@ -16,16 +18,17 @@ public class MonkeyModeGame extends Game{
      * If Move was correct, move on to next Round.
      * If Move was failing, set round to 0 again to
      * start over with Kopying from the beginning
+     *
      * @param xRot the xValue that will be compared
      * @param yRot the yValue that will be compared
      * @param zRot the zValue that will be compared
      * @return true if the Move was correct, otherwise false
      */
-    public boolean compareMove(float xRot, float yRot, float zRot){
+    public boolean compareMove(float xRot, float yRot, float zRot) {
         createNewMove();
         setMovePositions(xRot, yRot, zRot);
-        boolean wasMoveCorrect= wasMoveCorrect();
-        if(wasMoveCorrect) nextRound();
+        boolean wasMoveCorrect = wasMoveCorrect();
+        if (wasMoveCorrect) nextRound();
         else {
             restartRounds();
             /*
@@ -44,6 +47,7 @@ public class MonkeyModeGame extends Game{
      * But if we need to compare a Move, it uses the
      * x/y/z-values to compare the Move to the Move of
      * the currentRound instead.
+     *
      * @param xRot - xValue of the Move inputed
      * @param yRot - yValue of the Move inputed
      * @param zRot - zValue of the Move inputed
@@ -51,15 +55,14 @@ public class MonkeyModeGame extends Game{
      * was correctly Kopied. If Move was not correctly Kopied
      * it returns false.
      */
-    public boolean playNextRound(float xRot, float yRot, float zRot){
-        if(needToRecordNewMove()){
+    public boolean playNextRound(float xRot, float yRot, float zRot) {
+        if (needToRecordNewMove()) {
             recordNewMove(xRot, yRot, zRot);
             return true;
-        }
-        else return compareMove(xRot, yRot, zRot);
+        } else return compareMove(xRot, yRot, zRot);
     }
 
-    public void readyNextRound(){
+    public void readyNextRound() {
         //I think this can be empty
     }
 }

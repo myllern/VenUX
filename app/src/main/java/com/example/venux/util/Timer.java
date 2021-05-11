@@ -1,4 +1,4 @@
-package com.example.venux;
+package com.example.venux.util;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -16,11 +16,11 @@ public class Timer extends Observable implements Runnable {
 
     @Override
     public void run() {
-        if(!runs)return;
+        if (!runs) return;
         long t0 = System.currentTimeMillis();
         for (int i = 0; i <= startTime; i++) {
             long now = System.currentTimeMillis();
-            long d = (t0 +(i+1)*1000) - now;
+            long d = (t0 + (i + 1) * 1000) - now;
 
             try {
                 Thread.sleep(d);
@@ -28,15 +28,15 @@ public class Timer extends Observable implements Runnable {
                 e.printStackTrace();
             }
             setChanged();
-            notifyObservers(startTime-i);
+            notifyObservers(startTime - i);
         }
     }
 
-    public void start(){
+    public void start() {
         runs = true;
     }
 
-    public void stop(){
+    public void stop() {
         runs = false;
     }
 }

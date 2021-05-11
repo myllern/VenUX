@@ -1,11 +1,14 @@
-package com.example.venux;
+package com.example.venux.controllers;
 
 import android.content.Context;
-import android.database.Cursor;
+
+import com.example.venux.LionModeGame;
+import com.example.venux.model.Game;
+import com.example.venux.model.MonkeyModeGame;
 
 import java.util.ArrayList;
 
-public class Controller {
+public class GameController {
 
     private Game game;
     public DatabaseController db;
@@ -14,11 +17,11 @@ public class Controller {
 
 
 
-    public Controller(){
+    public GameController(){
         this.game = new MonkeyModeGame();
     }
 
-    public Controller(Context context){
+    public GameController(Context context){
         this.game = new MonkeyModeGame();
         this.db = new DatabaseController(context);
     }

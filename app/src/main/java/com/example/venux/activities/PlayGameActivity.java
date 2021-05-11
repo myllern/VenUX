@@ -18,8 +18,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.venux.Controller;
-import com.example.venux.Metronome;
+import com.example.venux.controllers.GameController;
+import com.example.venux.util.Metronome;
 import com.example.venux.R;
 
 import java.util.Observable;
@@ -36,7 +36,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     static final float ALPHA = 0.25f;
     private TextView gameInstructionsTV, playerName;
     private ConstraintLayout background;
-    private Controller controller;
+    private GameController gameController;
     private Button readyButton;
     static Timer timer;
     private Vibrator v;
@@ -55,23 +55,23 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         Bundle bundle = getIntent().getExtras();
-        controller = new Controller();
-        controller.addPlayersToGame(bundle.getStringArrayList("playerNames"));
-        controller.startGame();
+        gameController = new GameController();
+        gameController.addPlayersToGame(bundle.getStringArrayList("playerNames"));
+        gameController.startGame();
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         readyButton = findViewById(R.id.activity_play_game_ready_button);
         gameInstructionsTV = findViewById(R.id.activity_play_game_game_info);
         playerName = findViewById(R.id.currentPlayerTv);
         ready = false;
         //ToDo: line below MIGHT cause trouble after multiple players are implemented. Check that.
-        controller.resetGame(); //This line might cause trouble
+        gameController.resetGame(); //This line might cause trouble
     }
 
 
     public void readyClick(View view) {
         readyButton.setVisibility(View.INVISIBLE);
         ready = true;
-        Runnable countDown = new com.example.venux.Timer(this);
+        Runnable countDown = new com.example.venux.util.Timer(this);
         Thread countDownThread = new Thread(countDown);
         countDownThread.start();
     }
@@ -107,11 +107,11 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     @Override
     public void update(Observable o, Object arg) {
         if(!ready) return;
-        if (o instanceof com.example.venux.Timer) {
+        if (o instanceof com.example.venux.util.Timer) {
             int i = (Integer) arg;
             if (i == 0) {
-                ((com.example.venux.Timer) o).stop(); //Stops the Timer from notifying
-                Runnable metronome = new com.example.venux.Metronome(this);
+                ((com.example.venux.util.Timer) o).stop(); //Stops the Timer from notifying
+                Runnable metronome = new Metronome(this);
                 Thread gameThread = new Thread(metronome);
                 gameThread.start();
             }
@@ -122,15 +122,15 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                  */
 
 
-                String textToSet = controller.needToRecordNewMove() ?
+                String textToSet = gameController.needToRecordNewMove() ?
                         "Create move in " + String.valueOf(i) :
-                        "Kopy " + controller.getMovesLeft() + " Moves in " + String.valueOf(i);
+                        "Kopy " + gameController.getMovesLeft() + " Moves in " + String.valueOf(i);
                 gameInstructionsTV.setText(textToSet);
                 v.vibrate(50);
             }
         } else if (o instanceof Metronome) {
             playGame((Metronome) o);
-            if(controller.needToRecordNewMove())
+            if(gameController.needToRecordNewMove())
             {
                 /*
                  * ToDo: Set backgroundColour to currentPlayer's colour.
@@ -153,18 +153,18 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
          *  vibrations in this activity with those methods.
          */
             background.setBackground(getDrawable(R.drawable.play_game_theme));
-            if (controller.needToRecordNewMove()) { //This runs if we record a move
+            if (gameController.needToRecordNewMove()) { //This runs if we record a move
                 playerName.setTextColor(Color.parseColor("White"));
-                controller.playNextRound(xVal, yVal, zVal);
+                gameController.playNextRound(xVal, yVal, zVal);
                 v.vibrate(50);
                 setButtonVisible(); //See code below for this method if you are wondering
                 ready=false;
                 metronome.exit(); //Exiting metronome mode if you have copied a move
-                playerName.setText(controller.getCurrentPlayerName());
+                playerName.setText(gameController.getCurrentPlayerName());
 
             } else { //This runs if we Kopy a MOVE
-                boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
-                String instructionText = controller.needToRecordNewMove() ? "Create Move" : "Kopy " + controller.getMovesLeft() + " Moves";
+                boolean playSuccess = gameController.playNextRound(xVal, yVal, zVal);
+                String instructionText = gameController.needToRecordNewMove() ? "Create Move" : "Kopy " + gameController.getMovesLeft() + " Moves";
                 gameInstructionsTV.setText(instructionText);
                 /* ToDo:
                  *   Instead of playerNameColour below we should change background to green or
@@ -191,7 +191,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     }
 
     private void onFailure(Metronome metronome){
-        playerName.setText(controller.getCurrentPlayerName());
+        playerName.setText(gameController.getCurrentPlayerName());
         ready=false;
         metronome.exit(); //Exiting the metronome mode if you die
         setButtonVisible(); //See code below for this method if you are wondering

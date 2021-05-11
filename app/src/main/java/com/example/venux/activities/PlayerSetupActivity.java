@@ -1,26 +1,21 @@
 package com.example.venux.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.venux.Controller;
-import com.example.venux.CustomAdapter;
+import com.example.venux.controllers.GameController;
+import com.example.venux.util.CustomAdapter;
 import com.example.venux.R;
 
 public class PlayerSetupActivity extends AppCompatActivity {
-    private Controller controller;
+    private GameController gameController;
     private RecyclerView playerRecyclerView;
     private CustomAdapter myAdapter;
     private EditText playerName;
@@ -30,7 +25,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_setup);
-        controller = new Controller(this);
+        gameController = new GameController(this);
         playerRecyclerView = findViewById(R.id.PlayerSetupRecyclerView);
         myAdapter = new CustomAdapter();
         playerRecyclerView.setAdapter(myAdapter);

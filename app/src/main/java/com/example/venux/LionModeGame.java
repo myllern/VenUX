@@ -1,6 +1,8 @@
 package com.example.venux;
 
-public class LionModeGame extends Game{
+import com.example.venux.model.Game;
+
+public class LionModeGame extends Game {
 
     private boolean succededTheRound;
 

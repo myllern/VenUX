@@ -1,5 +1,7 @@
 package com.example.venux;
 
+import com.example.venux.model.Game;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

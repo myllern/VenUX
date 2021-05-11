@@ -1,4 +1,4 @@
-package com.example.venux;
+package com.example.venux.model;
 
 import java.lang.Object;
 // import java.awt.Color;
@@ -13,15 +13,17 @@ public class Player {
     private int life;
 
 
-    public Player (String name){
+    public Player(String name) {
         this.name = name;
         this.playerId = UUID.randomUUID().toString();
         this.score = new int[10];
         setColor(1); //Just nu blir alla gröna men detta kan vi ändra.
-        this.life =3;
+        this.life = 1;
     }
 
-    public void addScore(int round) { this.score[round]++; }
+    public void addScore(int round) {
+        this.score[round]++;
+    }
 
     public String getName() {
         return name;
@@ -39,8 +41,8 @@ public class Player {
         return score[round];
     }
 
-    public int getPlayerTotalScore(){
-        int totalScore =0;
+    public int getPlayerTotalScore() {
+        int totalScore = 0;
         for (int i = 0; i < 10; i++) {
             totalScore += score[i];
         }
@@ -48,8 +50,8 @@ public class Player {
     }
 
     //ToDo: this whole colour thing needs to be looked at again and changed
-    private void setColor(int colour){
-        switch(colour) {
+    private void setColor(int colour) {
+        switch (colour) {
             case 1:
                 this.color = "Green";
                 break;
@@ -64,21 +66,21 @@ public class Player {
         }
     }
 
-    public int died(){
-        this.life = this.life <= 0 ? 0 : this.life-1;
+    public int died() {
+        this.life = this.life <= 0 ? 0 : this.life - 1;
         return this.life;
     }
 
-    public boolean isDead(){
-        return this.life==0;
+    public boolean isDead() {
+        return this.life == 0;
     }
 
-    public int resetPlayerLife(){
-        this.life = 3;
+    public int resetPlayerLife() {
+        this.life = 1;
         return this.life;
     }
 
-    public int resetPlayerLife(int amountToSet){
+    public int resetPlayerLife(int amountToSet) {
         this.life = amountToSet;
         return this.life;
     }

@@ -1,4 +1,4 @@
-package com.example.venux;
+package com.example.venux.model;
 
 public class Move {
 
@@ -11,7 +11,7 @@ public class Move {
     private float[] yRotation;
     private float[] zRotation;
 
-    public Move(){
+    public Move() {
         this.xAcc = new float[1];
         this.yAcc = new float[1];
         this.zAcc = new float[1];
@@ -20,45 +20,52 @@ public class Move {
         this.zRotation = new float[1];
 
     }
-    public float[] getxRotation(){
+
+    public float[] getxRotation() {
         return this.xRotation;
     }
-    public float[] getyRotation(){
+
+    public float[] getyRotation() {
         return this.yRotation;
     }
-    public float[] getzRotation(){
+
+    public float[] getzRotation() {
         return this.zRotation;
     }
-    public float[] getxAcc(){
+
+    public float[] getxAcc() {
         return this.xAcc;
     }
-    public float[] getyAcc(){
+
+    public float[] getyAcc() {
         return this.yAcc;
     }
-    public float[] getzAcc(){
+
+    public float[] getzAcc() {
         return this.zAcc;
     }
 
     /**
      * Compares this move to the other move and returns false if they
      * are too far apart in any of the rotational axis.
+     *
      * @param otherMove - the other move you want to compare.
      * @return true if moves are close enough, false otherwise.
      */
-    public boolean isSimpleMoveCloseEnough(Move otherMove){
+    public boolean isSimpleMoveCloseEnough(Move otherMove) {
         boolean returnValue = true;
         int distanceValue = 3;
-        if(Math.abs(this.xRotation[0]-otherMove.getxRotation()[0])>distanceValue)
-            returnValue=false;
-        if(Math.abs(this.yRotation[0]-otherMove.getyRotation()[0])>distanceValue)
-            returnValue=false;
-        if(Math.abs(this.zRotation[0]-otherMove.getzRotation()[0])>distanceValue)
-            returnValue=false;
+        if (Math.abs(this.xRotation[0] - otherMove.getxRotation()[0]) > distanceValue)
+            returnValue = false;
+        if (Math.abs(this.yRotation[0] - otherMove.getyRotation()[0]) > distanceValue)
+            returnValue = false;
+        if (Math.abs(this.zRotation[0] - otherMove.getzRotation()[0]) > distanceValue)
+            returnValue = false;
 
         return returnValue;
     }
 
-    public boolean isComplexMoveCloseEnough(Move otherMove){
+    public boolean isComplexMoveCloseEnough(Move otherMove) {
         //ToDo implement method to compare moves if they have more values than one. Low priority.
         return false;
     }

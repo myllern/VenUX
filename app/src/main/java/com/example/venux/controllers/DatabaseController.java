@@ -1,4 +1,4 @@
-package com.example.venux;
+package com.example.venux.controllers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,21 +13,18 @@ public class DatabaseController extends SQLiteOpenHelper {
     private static final String ID = "ID";
 
 
-
-
-
     public DatabaseController(Context context) {
-        super(context, TABLE_NAME, null,1);
+        super(context, TABLE_NAME, null, 1);
 
     }
 
 
-        @Override
+    @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         // Creates Table and assign ID to name
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER, " +
-                NAME +" TEXT)";
+                NAME + " TEXT)";
         sqLiteDatabase.execSQL(createTable);
 
     }
@@ -40,9 +37,8 @@ public class DatabaseController extends SQLiteOpenHelper {
     }
 
 
-
     // Adds data and return -1 if something went wrong
-    public boolean addData(int id, String item){
+    public boolean addData(int id, String item) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(NAME, item);
@@ -57,33 +53,31 @@ public class DatabaseController extends SQLiteOpenHelper {
         }
 
 
-
     }
 
-    public Cursor getData(int id){
+    public Cursor getData(int id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor data = db.rawQuery("select * from " + TABLE_NAME + " where id="+id+"", null);
+        Cursor data = db.rawQuery("select * from " + TABLE_NAME + " where id=" + id + "", null);
 
         return data;
 
 
-
     }
 
-    public boolean resetTable(){
+    public boolean resetTable() {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("delete from "+ TABLE_NAME);
+        db.execSQL("delete from " + TABLE_NAME);
         return true;
     }
 
-    public boolean updatePlayer(int id, String newName){
+    public boolean updatePlayer(int id, String newName) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(NAME,newName);
-        db.update(TABLE_NAME, contentValues, ID + " = ? " ,
+        contentValues.put(NAME, newName);
+        db.update(TABLE_NAME, contentValues, ID + " = ? ",
                 new String[]{String.valueOf(id)});
         return true;
     }
