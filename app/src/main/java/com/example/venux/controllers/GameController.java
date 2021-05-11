@@ -2,9 +2,7 @@ package com.example.venux.controllers;
 
 import android.content.Context;
 
-import com.example.venux.LionModeGame;
 import com.example.venux.model.Game;
-import com.example.venux.model.MonkeyModeGame;
 
 import java.util.ArrayList;
 
@@ -18,20 +16,12 @@ public class GameController {
 
 
     public GameController(){
-        this.game = new MonkeyModeGame();
+        this.game = new Game();
     }
 
     public GameController(Context context){
-        this.game = new MonkeyModeGame();
+        this.game = new Game();
         this.db = new DatabaseController(context);
-    }
-
-    public void createMonkeyGame(){
-       this.game = new MonkeyModeGame();
-    }
-
-    public void createLionGame(){
-        this.game = new LionModeGame();
     }
 
     public boolean playNextRound(float xRot, float yRot, float zRot){

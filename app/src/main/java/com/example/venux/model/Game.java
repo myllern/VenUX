@@ -6,7 +6,7 @@ import com.example.venux.model.Player;
 
 import java.util.ArrayList;
 
-public abstract class Game {
+public class Game {
 
     protected ArrayList<Player> players;
     protected Player currentPlayer;
@@ -14,6 +14,7 @@ public abstract class Game {
     protected Move currentMove;
     protected int numberOfRounds;
     protected int currentRound;
+    private boolean succededTheRound;
 
     public Game() {
         this.players = new ArrayList<Player>();
@@ -107,6 +108,12 @@ public abstract class Game {
         return currentRound;
     }
 
+    public void readyNextRound(){
+        succededTheRound = false;
+        createNewMove();
+        nextRound();
+    }
+
     /**
      * Tells us if we need to record a new Move
      * (instead of Kopying a move). This happens
@@ -154,10 +161,6 @@ public abstract class Game {
     }
 
 
-    public abstract boolean playNextRound(float xRot, float yRot, float zRot);
-
-    public abstract void readyNextRound();
-
     //----------------------------//
     // Methods for players//
 
@@ -203,6 +206,44 @@ public abstract class Game {
      */
     public int getCurrentPlayerScore() {
         return currentPlayer.getPlayerTotalScore();
+    }
+
+    public boolean compareMove(float xRot, float yRot, float zRot) {
+        createNewMove();
+        setMovePositions(xRot, yRot, zRot);
+        boolean wasMoveCorrect = wasMoveCorrect();
+        if (wasMoveCorrect) nextRound();
+        else {
+            restartRounds();
+            /*
+             * Todo set next line to visible when players are
+             *  implemented in frontend too
+             */
+            //super.currentPlayer.died();
+            currentPlayer = getNextPlayer();
+        }
+        return wasMoveCorrect;
+    }
+
+    /**
+     * Plays next round. If we need to record a new Move,
+     * it uses the x/y/z-values to record the Move.
+     * But if we need to compare a Move, it uses the
+     * x/y/z-values to compare the Move to the Move of
+     * the currentRound instead.
+     *
+     * @param xRot - xValue of the Move inputed
+     * @param yRot - yValue of the Move inputed
+     * @param zRot - zValue of the Move inputed
+     * @return true if a Move was recorded or if the Move
+     * was correctly Kopied. If Move was not correctly Kopied
+     * it returns false.
+     */
+    public boolean playNextRound(float xRot, float yRot, float zRot) {
+        if (needToRecordNewMove()) {
+            recordNewMove(xRot, yRot, zRot);
+            return true;
+        } else return compareMove(xRot, yRot, zRot);
     }
 
     /*
