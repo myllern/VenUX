@@ -1,17 +1,14 @@
 package com.example.venux.activities;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -19,15 +16,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.venux.controllers.GameController;
-import com.example.venux.util.Metronome;
+import com.example.venux.model.Move;
+import com.example.venux.util.CountdownTimer;
 import com.example.venux.R;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Timer;
 
 
 public class PlayGameActivity extends AppCompatActivity implements SensorEventListener, Observer {
+
+
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private float[] mLastAccelerometer = new float[3];
@@ -36,46 +35,46 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     static final float ALPHA = 0.25f;
     private TextView gameInstructionsTV, playerName;
     private ConstraintLayout background;
-    private GameController gameController;
     private Button readyButton;
-    static Timer timer;
     private Vibrator v;
-    private boolean ready;
     private MediaPlayer mediaPlayer;
 
+    Thread t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //View stuff
         setContentView(R.layout.activity_play_game);
         view = findViewById(R.id.playGame_view);
         background = findViewById(R.id.playGame_view);
-        timer = new Timer();
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        Bundle bundle = getIntent().getExtras();
-        gameController = new GameController();
-        gameController.addPlayersToGame(bundle.getStringArrayList("playerNames"));
-        gameController.startGame();
-        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         readyButton = findViewById(R.id.activity_play_game_ready_button);
         gameInstructionsTV = findViewById(R.id.activity_play_game_game_info);
         playerName = findViewById(R.id.currentPlayerTv);
-        ready = false;
-        //ToDo: line below MIGHT cause trouble after multiple players are implemented. Check that.
-        gameController.resetGame(); //This line might cause trouble
+        readyButton = findViewById(R.id.activity_play_game_ready_button);
+        gameInstructionsTV = findViewById(R.id.activity_play_game_game_info);
+        playerName = findViewById(R.id.currentPlayerTv);
+
+        //Sensors and vibration motor.
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 
-
+    /**
+     * Ready clicks changes player state to ready.
+     *
+     * @param view
+     */
     public void readyClick(View view) {
+        //TODO: Start countdown timer
         readyButton.setVisibility(View.INVISIBLE);
-        ready = true;
-        Runnable countDown = new com.example.venux.util.Timer(this);
-        Thread countDownThread = new Thread(countDown);
-        countDownThread.start();
+        Runnable countDownTimer = new CountdownTimer(this, 1000, 3);
+        t1 = new Thread(countDownTimer);
+        t1.start();
     }
-
 
 
     @Override
@@ -100,122 +99,98 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-
+        //Unused
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void update(Observable o, Object arg) {
-        if(!ready) return;
-        if (o instanceof com.example.venux.util.Timer) {
-            int i = (Integer) arg;
-            if (i == 0) {
-                ((com.example.venux.util.Timer) o).stop(); //Stops the Timer from notifying
-                Runnable metronome = new Metronome(this);
-                Thread gameThread = new Thread(metronome);
-                gameThread.start();
-            }
-            else{
-                /*
-                 * ToDo: make text for countDown prettier, maybe big,
-                 *  maybe two separate textViews. Artistic freedom Yes
-                 */
-
-
-                String textToSet = gameController.needToRecordNewMove() ?
-                        "Create move in " + String.valueOf(i) :
-                        "Kopy " + gameController.getMovesLeft() + " Moves in " + String.valueOf(i);
-                gameInstructionsTV.setText(textToSet);
-                v.vibrate(50);
-            }
-        } else if (o instanceof Metronome) {
-            playGame((Metronome) o);
-            if(gameController.needToRecordNewMove())
-            {
-                /*
-                 * ToDo: Set backgroundColour to currentPlayer's colour.
-                 *  A few things in controller needs to be fixed for this, and also possibly in
-                 *  Player Class (the colour thing right now is not really in work).
-                 *  Also see to-do below
-                 */
-                ((Metronome) o).exit();
-                setButtonVisible();
+        if (o instanceof CountdownTimer) {
+            if (GameController.isCreateMoveState()) {
+                //Create Move State
+                int ticksLeft = (Integer) arg;
+                if (ticksLeft > 0) {
+                    //Countdown for create move, not done
+                    gameInstructionsTV.setText("Record move in " + ticksLeft);
+                } else {
+                    //Countdown for create move, done
+                    bumpNextStep();
+                    gameInstructionsTV.setText("Successfully recorded");
+                    playSuccessSound();
+                    v.vibrate(500);
+                    //Start countdown to copy
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    gameInstructionsTV.setText("Are you ready?");
+                    setButtonVisible();
+                }
+            } else if (GameController.isLastMove()) {
+                //Copy Move but last move
+                int ticksLeft = (Integer) arg;
+                if (ticksLeft > 0) {
+                    v.vibrate(25);
+                } else {
+                    if(bumpNextStep()) {
+                        onLastSuccess();
+                        t1 = new Thread(new CountdownTimer(this, 1000, 3));
+                    } else {
+                        onFailure();
+                    }
+                }
+            } else {
+                //Copy Move State
+                int ticksLeft = (Integer) arg;
+                if (ticksLeft > 0) {
+                    v.vibrate(25);
+                } else {
+                    if(bumpNextStep()) {
+                        onSuccess();
+                        t1 = new Thread(new CountdownTimer(this, 1000, 3));
+                    } else {
+                        onFailure();
+                    }
+                }
             }
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void playGame(Metronome metronome){
-        /*
-         * ToDo: Generally, maybe explore what kind of vibrations
-         *  are suitable and then change them to that. Maybe create
-         *  methods for good or bad vibrations and replace all
-         *  vibrations in this activity with those methods.
-         */
-            background.setBackground(getDrawable(R.drawable.play_game_theme));
-            if (gameController.needToRecordNewMove()) { //This runs if we record a move
-                playerName.setTextColor(Color.parseColor("White"));
-                gameController.playNextRound(xVal, yVal, zVal);
-                v.vibrate(50);
-                setButtonVisible(); //See code below for this method if you are wondering
-                ready=false;
-                metronome.exit(); //Exiting metronome mode if you have copied a move
-                playerName.setText(gameController.getCurrentPlayerName());
-
-            } else { //This runs if we Kopy a MOVE
-                boolean playSuccess = gameController.playNextRound(xVal, yVal, zVal);
-                String instructionText = gameController.needToRecordNewMove() ? "Create Move" : "Kopy " + gameController.getMovesLeft() + " Moves";
-                gameInstructionsTV.setText(instructionText);
-                /* ToDo:
-                 *   Instead of playerNameColour below we should change background to green or
-                 *   player's colour.
-                 *   A few things in controller needs to be fixed for this, and also possibly in
-                 *   Player Class (the colour thing right now is not really in work)
-                 *   Also see to-do above
-                 */
-                if (playSuccess) {
-                    onSucess();
-                } else {
-                    onFailure(metronome);
-                }
-            }
-
-
+    private boolean bumpNextStep() {
+        Move move = new Move(xVal, yVal, zVal);
+        if(!GameController.playNextStep(move)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    private void onSucess(){
+    private void onLastSuccess() {
+        setButtonVisible();
         v.vibrate(50);
         playSuccessSound();
-        gameInstructionsTV.setText("SUCCESS");
+        gameInstructionsTV.setText("Great! Ready to record move?");
         background.setBackgroundColor(0xFF66BB6A);
     }
 
-    private void onFailure(Metronome metronome){
-        playerName.setText(gameController.getCurrentPlayerName());
-        ready=false;
-        metronome.exit(); //Exiting the metronome mode if you die
+    private void onSuccess() {
+        v.vibrate(50);
+        playSuccessSound();
+        gameInstructionsTV.setText(GameController.getCurrentMove() + "/" + GameController.getAmountOfMoves());
+        background.setBackgroundColor(0xFF66BB6A);
+    }
+
+    private void onFailure() {
+        //playerName.setText(gameController.getCurrentPlayerName());
         setButtonVisible(); //See code below for this method if you are wondering
         v.vibrate(1000);
         background.setBackgroundColor(0xFFEF5350);
-        ready=false;
         setButtonVisible();
         gameInstructionsTV.setText("YOU ARE OUT");
         playFailSound();
     }
 
-    //ToDo make a better(more correct) comment for setButtonVisible method.
-    /**
-     * This method sets the button to visible.
-     * A Button is a View (I think), and Views can only
-     * be touched on a special thread called UiThread. Idk why.
-     * Therefore if we touch it in other threads, it crashes.
-     * runOnUiThread runs this from the UiThread and therefore
-     * it does not crash.
-     *
-     * Use this kind of thing if you need to touch other
-     * View objects also.
-     */
-    private void setButtonVisible(){
+    private void setButtonVisible() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -227,7 +202,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     /**
      * Plays a sound for a successful/correct move.
      */
-    public void playSuccessSound(){
+    public void playSuccessSound() {
         mediaPlayer = mediaPlayer.create(this, R.raw.correct_move_1);
 
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -248,7 +223,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     /**
      * Plays a sound for a successful/correct move.
      */
-    public void playFailSound(){
+    public void playFailSound() {
         mediaPlayer = mediaPlayer.create(this, R.raw.failed_move_1);
 
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {

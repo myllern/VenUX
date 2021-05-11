@@ -1,69 +1,37 @@
 package com.example.venux.controllers;
 
-import android.content.Context;
-
-import com.example.venux.model.Game;
+import com.example.venux.model.Move;
+import com.example.venux.model.NewGame;
+import com.example.venux.model.Player;
 
 import java.util.ArrayList;
 
 public class GameController {
 
-    private Game game;
-    public DatabaseController db;
+    private static NewGame game;
 
-
-
-
-
-    public GameController(){
-        this.game = new Game();
+    public static void createNewGame(ArrayList<Player> players) {
+        game = new NewGame(players);
     }
 
-    public GameController(Context context){
-        this.game = new Game();
-        this.db = new DatabaseController(context);
+    public static boolean playNextStep(Move move) {
+        return game.playNextStep(move);
     }
 
-    public boolean playNextRound(float xRot, float yRot, float zRot){
-        return game.playNextRound(xRot, yRot, zRot);
+    public static boolean isCreateMoveState() {
+        return game.isCreateMoveState();
     }
 
-    public void resetGame(){
-        game.resetGame();
+    public static boolean isLastMove() {
+        return game.isLastMove();
     }
 
-    public void startGame(){
-        game.startGame();
+    public static int getCurrentMove() {
+        return game.getCurrentMove();
     }
 
-    public void readyNextRound(){
-        game.readyNextRound();
+    public static int getAmountOfMoves() {
+        return game.getAmountOfMoves();
     }
 
-    public int getCurrentRound(){
-        return game.getCurrentRound();
-    }
-
-    public boolean needToRecordNewMove(){
-        return game.needToRecordNewMove();
-    }
-
-    public int getMovesLeft(){ return game.getMovesLeft();}
-
-    public boolean isNextRoundRecorderRound(){
-        return game.isNextRoundRecorderRound();
-    }
-
-    public void addPlayersToGame(ArrayList<String> playerNames){
-        game.addAllPlayers(playerNames);
-    }
-
-    public String getCurrentPlayerName(){
-        return game.getCurrentPlayerName();
-    }
-
-    /*
-     * ToDo add multiple methods to get information about players.
-     *  See Game
-     */
 }
