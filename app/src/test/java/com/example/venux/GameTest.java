@@ -7,6 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class GameTest {
+    /*
 
     Game game;
 
@@ -41,4 +42,5 @@ public class GameTest {
      * ToDo tests about Players, especially getNextPlayer()
      *  extra especially if Todos in that method is implemented
      */
+
 }

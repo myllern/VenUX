@@ -1,5 +1,6 @@
 package com.example.venux.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +36,10 @@ public class PlayerSetupActivity extends AppCompatActivity {
         playerRecyclerView.setAdapter(myAdapter);
         playerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         playerName = findViewById(R.id.playerSetup_addPlayerField);
+
+        //Disable the go-back button
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
     }
 
 
