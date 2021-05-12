@@ -40,7 +40,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     private ConstraintLayout background;
     private Button readyButton;
     private Vibrator v;
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer_1;
+    private MediaPlayer mediaPlayer_2;
 
     Thread t1;
 
@@ -187,10 +188,10 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void onFailure() {
         //playerName.setText(gameController.getCurrentPlayerName());
+        playFailSound();
         v.vibrate(1000);
         background.setBackgroundColor(0xFFEF5350);
         gameInstructionsTV.setText("YOU ARE OUT");
-        playFailSound();
         try {
             Thread.sleep(3000);
         } catch (Exception e) {
@@ -220,18 +221,18 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
      * Plays a sound for a successful/correct move.
      */
     public void playSuccessSound() {
-        mediaPlayer = mediaPlayer.create(this, R.raw.correct_move_1);
+        mediaPlayer_1 = mediaPlayer_1.create(this, R.raw.correct_move_1);
 
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        mediaPlayer_1.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mediaPlayer.start();
+                mediaPlayer_1.start();
             }
         });
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        mediaPlayer_1.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.release();
+                mediaPlayer_1.release();
             }
         });
 
@@ -241,18 +242,18 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
      * Plays a sound for a successful/correct move.
      */
     public void playFailSound() {
-        mediaPlayer = mediaPlayer.create(this, R.raw.failed_move_1);
+        mediaPlayer_2 = mediaPlayer_2.create(this, R.raw.failed_move_1);
 
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        mediaPlayer_2.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mediaPlayer.start();
+                mediaPlayer_2.start();
             }
         });
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        mediaPlayer_2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.release();
+                mediaPlayer_2.release();
             }
         });
 
