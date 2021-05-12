@@ -24,6 +24,7 @@
         <activity android:name=".activities.InstructionsActivity" />
         <activity android:name=".activities.GameCountdownActivity" />
         <activity android:name=".activities.PlayerSetupActivity" />
+        <activity android:name=".activities.ScoreboardActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

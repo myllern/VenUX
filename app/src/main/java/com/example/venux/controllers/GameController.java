@@ -34,4 +34,12 @@ public class GameController {
         return game.getAmountOfMoves();
     }
 
+    public static Player getCurrentPlayer() {
+        return game.getCurrentPlayer();
+    }
+
+    public static boolean isGameFinished() {
+        return game.isGameFinished();
+    }
+
 }

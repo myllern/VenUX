@@ -22,8 +22,9 @@ public class NewGame {
     }
 
     private void killCurrentPlayer() {
+        int playerToKill = currentPlayer;
         if(currentPlayer == playersAlive.size() - 1) currentPlayer = 0;
-        playersDead.add(playersAlive.remove(currentPlayer));
+        playersDead.add(playersAlive.remove(playerToKill));
         currentMove = 0;
     }
 
@@ -84,6 +85,7 @@ public class NewGame {
         }
         // If we are in move creation state, we add move and move to next player.
         if (isCreateMoveState) {
+            playersAlive.get(currentPlayer).incrementScore();
             addMove(otherMove);
             nextPlayer();
             isCreateMoveState = false;
@@ -102,4 +104,7 @@ public class NewGame {
     }
 
 
+    public Player getCurrentPlayer() {
+        return this.playersAlive.get(currentPlayer);
+    }
 }

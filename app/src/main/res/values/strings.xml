@@ -34,5 +34,6 @@
     <string name="element_text">element text</string>
     <string name="get_ready_display">Are you ready?</string>
     <string name="get_ready_Tv">I\'M READY</string>
+    <string name="textview">TextView</string>
 
 </resources>

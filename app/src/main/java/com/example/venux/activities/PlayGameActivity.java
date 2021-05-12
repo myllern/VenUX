@@ -1,14 +1,17 @@
 package com.example.venux.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -33,7 +36,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     private View view;
     float xVal, yVal, zVal;
     static final float ALPHA = 0.25f;
-    private TextView gameInstructionsTV, playerName;
+    private TextView gameInstructionsTV, currentPlayerTV;
     private ConstraintLayout background;
     private Button readyButton;
     private Vibrator v;
@@ -51,10 +54,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         background = findViewById(R.id.playGame_view);
         readyButton = findViewById(R.id.activity_play_game_ready_button);
         gameInstructionsTV = findViewById(R.id.activity_play_game_game_info);
-        playerName = findViewById(R.id.currentPlayerTv);
-        readyButton = findViewById(R.id.activity_play_game_ready_button);
-        gameInstructionsTV = findViewById(R.id.activity_play_game_game_info);
-        playerName = findViewById(R.id.currentPlayerTv);
+        currentPlayerTV = findViewById(R.id.currentPlayerTv);
+        currentPlayerTV.setText(GameController.getCurrentPlayer().getName());
 
         //Sensors and vibration motor.
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -102,9 +103,11 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         //Unused
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void update(Observable o, Object arg) {
         if (o instanceof CountdownTimer) {
+            background.setBackground(getDrawable(R.drawable.play_game_theme));
             if (GameController.isCreateMoveState()) {
                 //Create Move State
                 int ticksLeft = (Integer) arg;
@@ -123,7 +126,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    gameInstructionsTV.setText("Are you ready?");
+                    gameInstructionsTV.setText("Are you ready to kopy " + GameController.getAmountOfMoves() + " moves?");
+                    currentPlayerTV.setText(GameController.getCurrentPlayer().getName());
                     setButtonVisible();
                 }
             } else if (GameController.isLastMove()) {
@@ -132,9 +136,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 if (ticksLeft > 0) {
                     v.vibrate(25);
                 } else {
-                    if(bumpNextStep()) {
+                    if (bumpNextStep()) {
                         onLastSuccess();
-                        t1 = new Thread(new CountdownTimer(this, 1000, 3));
                     } else {
                         onFailure();
                     }
@@ -145,9 +148,10 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 if (ticksLeft > 0) {
                     v.vibrate(25);
                 } else {
-                    if(bumpNextStep()) {
+                    if (bumpNextStep()) {
                         onSuccess();
                         t1 = new Thread(new CountdownTimer(this, 1000, 3));
+                        t1.start();
                     } else {
                         onFailure();
                     }
@@ -158,7 +162,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
     private boolean bumpNextStep() {
         Move move = new Move(xVal, yVal, zVal);
-        if(!GameController.playNextStep(move)) {
+        if (!GameController.playNextStep(move)) {
             return false;
         } else {
             return true;
@@ -180,14 +184,27 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         background.setBackgroundColor(0xFF66BB6A);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void onFailure() {
         //playerName.setText(gameController.getCurrentPlayerName());
-        setButtonVisible(); //See code below for this method if you are wondering
         v.vibrate(1000);
         background.setBackgroundColor(0xFFEF5350);
-        setButtonVisible();
         gameInstructionsTV.setText("YOU ARE OUT");
         playFailSound();
+        try {
+            Thread.sleep(3000);
+        } catch (Exception e) {
+
+        }
+        if(GameController.isGameFinished()) {
+            Intent intent = new Intent(this, ScoreboardActivity.class);
+            startActivity(intent);
+        } else {
+            background.setBackground(getDrawable(R.drawable.play_game_theme));
+            currentPlayerTV.setText(GameController.getCurrentPlayer().getName());
+            gameInstructionsTV.setText("Are you ready to kopy " + GameController.getAmountOfMoves() + " moves?");
+            setButtonVisible();
+        }
     }
 
     private void setButtonVisible() {
