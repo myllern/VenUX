@@ -19,6 +19,7 @@ import com.example.venux.Controller;
 import com.example.venux.Metronome;
 import com.example.venux.R;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -163,8 +164,6 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 boolean playSuccess = controller.playNextRound(xVal, yVal, zVal);
 
                 /* ToDo:
-                 *   Instead of playerNameColour below we should change background to green or
-                 *   player's colour.
                  *   A few things in controller needs to be fixed for this, and also possibly in
                  *   Player Class (the colour thing right now is not really in work)
                  *   Also see to-do above
@@ -244,6 +243,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 mediaPlayer.start();
             }
         });
+
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
