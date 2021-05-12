@@ -15,7 +15,7 @@
     <string name="player_1">Player 1</string>
     <string name="player_2">Player 2</string>
     <string name="ready">Ready</string>
-    <string name="get_ready">GET READY</string>
+    <string name="get_ready">Are you ready?</string>
     <string name="name_player_1">Player_1</string>
     <string name="add_another_player">Add another player</string>
     <string name="plus">+</string>
@@ -32,5 +32,8 @@
     <string name="add_player">Add another player</string>
     <string name="color_player_3">color</string>
     <string name="element_text">element text</string>
+    <string name="get_ready_display">Are you ready?</string>
+    <string name="get_ready_Tv">I\'M READY</string>
+    <string name="textview">TextView</string>
 
 </resources>

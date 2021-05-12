@@ -1,13 +1,10 @@
 package com.example.venux;
 
-import android.util.Log;
+import com.example.venux.model.Move;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.Console;
 
 import static org.junit.Assert.*;
 

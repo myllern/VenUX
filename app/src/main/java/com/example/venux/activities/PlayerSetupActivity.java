@@ -1,36 +1,35 @@
 package com.example.venux.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.venux.Controller;
-import com.example.venux.CustomAdapter;
+import com.example.venux.controllers.GameController;
+import com.example.venux.model.Player;
+import com.example.venux.util.CustomAdapter;
 import com.example.venux.R;
 
+import java.util.ArrayList;
+
 public class PlayerSetupActivity extends AppCompatActivity {
-    private Controller controller;
     private RecyclerView playerRecyclerView;
     private CustomAdapter myAdapter;
     private EditText playerName;
+    private ArrayList<Player> playerList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        playerList = new ArrayList<Player>();
+
         setContentView(R.layout.activity_player_setup);
-        controller = new Controller(this);
         playerRecyclerView = findViewById(R.id.PlayerSetupRecyclerView);
         myAdapter = new CustomAdapter();
         playerRecyclerView.setAdapter(myAdapter);
@@ -49,20 +48,9 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
     public void startGame(View view){
-        /*
-         *  Todo: send all the players into the game.
-         *   Get players with
-         *       myAdapter.getData();
-         */
+        GameController.createNewGame(playerList);
         Intent playGame = new Intent(this, PlayGameActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putStringArrayList("playerNames", myAdapter.getData());
-        playGame.putExtras(bundle);
         startActivity(playGame);
-
-
-
-
     };
 
     public void goToInstructions(View view){
@@ -72,17 +60,14 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
     public void addPlayer(View view){
-        //Todo: randomize player colour
         String newPlayerName = this.playerName.getText().toString();
         if(newPlayerName.isEmpty()){
             newPlayerName = "Player " + (myAdapter.getItemCount()+1);
         }
         myAdapter.addNewData(newPlayerName);
         playerName.setText("");
+        Player newPlayer = new Player(newPlayerName);
+        playerList.add(newPlayer);
     }
-
-    //Todo: method to remove players.
-
-    //Todo: method to choose player colour.
 
 }

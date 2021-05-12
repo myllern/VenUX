@@ -1,10 +1,12 @@
-package com.example.venux;
+package com.example.venux.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class GameStartCountdown extends AppCompatActivity {
+import com.example.venux.R;
+
+public class GameCountdownActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
