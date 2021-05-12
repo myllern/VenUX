@@ -41,7 +41,9 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     private ConstraintLayout background;
     private Button readyButton;
     private Vibrator v;
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer_1;
+    private MediaPlayer mediaPlayer_2;
+    private MediaPlayer mediaPlayer_3;
 
     Thread t1;
 
@@ -221,22 +223,23 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         });
     }
 
+
     /**
      * Plays a sound for a successful/correct move.
      */
     public void playSuccessSound() {
-        mediaPlayer = mediaPlayer.create(this, R.raw.correct_move_1);
+        mediaPlayer_1 = mediaPlayer_1.create(this, R.raw.correct_move_1);
 
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        mediaPlayer_1.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mediaPlayer.start();
+                mediaPlayer_1.start();
             }
         });
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        mediaPlayer_1.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.release();
+                mediaPlayer_1.release();
             }
         });
 
@@ -246,18 +249,39 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
      * Plays a sound for a successful/correct move.
      */
     public void playFailSound() {
-        mediaPlayer = mediaPlayer.create(this, R.raw.failed_move_1);
+        mediaPlayer_2 = mediaPlayer_2.create(this, R.raw.failed_move_1);
 
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        mediaPlayer_2.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mediaPlayer.start();
+                mediaPlayer_2.start();
             }
         });
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        mediaPlayer_2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.release();
+                mediaPlayer_2.release();
+            }
+        });
+
+    }
+
+    /**
+     * Plays a sound on countdown.
+     */
+    public void playCountdownSound() {
+        //mediaPlayer_3 = mediaPlayer_3.create(this,);
+
+        mediaPlayer_3.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mediaPlayer_3.start();
+            }
+        });
+        mediaPlayer_3.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer_3.release();
             }
         });
 
