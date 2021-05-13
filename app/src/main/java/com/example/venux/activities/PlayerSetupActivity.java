@@ -42,9 +42,9 @@ public class PlayerSetupActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(false);
     }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+    }
 
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();

@@ -16,9 +16,6 @@ public class MainActivity extends AppCompatActivity {
     PlayerSetupActivity playerSetup;
     private Button btn_start;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(false);
     }
 
-
+    @Override
+    public void onBackPressed() {
+    }
 
     public void navToPlayerSetup(View view) {
         Intent playerSetup = new Intent(this, PlayerSetupActivity.class);

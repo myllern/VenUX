@@ -110,6 +110,10 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         //Unused
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void update(Observable o, Object arg) {
