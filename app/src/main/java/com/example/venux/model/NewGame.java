@@ -8,6 +8,7 @@ public class NewGame {
     private ArrayList<Player> playersAlive;
     private ArrayList<Player> playersDead;
     private ArrayList<Move> moveList;
+    private ArrayList<Move> acceptedMoves;
     private int currentPlayer = 0, currentMove = 0;
     private boolean isCreateMoveState = true;
 
@@ -15,10 +16,25 @@ public class NewGame {
         this.playersAlive = initialPlayers;
         playersDead = new ArrayList<Player>();
         moveList = new ArrayList<Move>();
+        acceptedMoves = new ArrayList<Move>();
+        createAcceptedMoves();
     }
 
-    private void addMove(Move newMove) {
-        moveList.add(newMove);
+    public void createAcceptedMoves(){
+        acceptedMoves.add(new Move(0,0,9)); // screen up
+        acceptedMoves.add(new Move(0,9,0)); // screen towards player
+        acceptedMoves.add(new Move(9,0,0)); // screen left
+        acceptedMoves.add(new Move(-9,0,0)); // screen right
+    }
+
+    private boolean addMove(Move newMove) {
+        for (Move move: acceptedMoves) {
+            if(newMove.compareTo(move) == 0){
+                moveList.add(move);
+                return true;
+            }
+        }
+        return false;
     }
 
     private void killCurrentPlayer() {
@@ -86,10 +102,16 @@ public class NewGame {
         // If we are in move creation state, we add move and move to next player.
         if (isCreateMoveState) {
             playersAlive.get(currentPlayer).incrementScore();
-            addMove(otherMove);
-            nextPlayer();
-            isCreateMoveState = false;
-            return true;
+            if(addMove(otherMove)){
+                nextPlayer();
+                isCreateMoveState = false;
+                return true;
+            }
+            else{
+                return false;
+            }
+
+
         } else {
             // If we are in KopyMove state, we compare moves and increment to next move or player.
             boolean succeeded = compareMove(otherMove);

@@ -127,17 +127,31 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                     gameInstructionsTV.setText("Record move in " + ticksLeft);
                 } else {
                     //Countdown for create move, done
-                    bumpNextStep();
-                    gameInstructionsTV.setText("Successfully recorded");
-                    playSuccessSound();
-                    v.vibrate(500);
+                    boolean couldCreateMove = bumpNextStep();
+                    if(couldCreateMove){
+                        gameInstructionsTV.setText("Successfully recorded");
+                        playSuccessSound();
+                        v.vibrate(500);
+                    }
+                    else{
+                        gameInstructionsTV.setText("Did not record correctly");
+                        v.vibrate(1000);
+                    }
+
+
+
                     //Start countdown to copy
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    gameInstructionsTV.setText("Are you ready to kopy " + GameController.getAmountOfMoves() + " moves?");
+                    if(couldCreateMove){
+                        gameInstructionsTV.setText("Are you ready to kopy " + GameController.getAmountOfMoves() + " moves?");
+                    }
+                    else{
+                        gameInstructionsTV.setText("Record again");
+                    }
                     currentPlayerTV.setText(GameController.getCurrentPlayer().getName());
                     setButtonVisible();
                 }
@@ -173,11 +187,8 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
     private boolean bumpNextStep() {
         Move move = new Move(xVal, yVal, zVal);
-        if (!GameController.playNextStep(move)) {
-            return false;
-        } else {
-            return true;
-        }
+        return GameController.playNextStep(move);
+
     }
 
     private void onLastSuccess() {
