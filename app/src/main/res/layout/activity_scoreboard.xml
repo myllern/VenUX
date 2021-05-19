@@ -15,7 +15,7 @@
         android:layout_marginTop="64dp"
         android:text="@string/winnerTV"
         android:textColor="#FFFFFF"
-        android:textSize="48sp"
+        android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="@string/textview"
         android:textColor="#7E57C2"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,17 +35,22 @@
 
     <TextView
         android:id="@+id/scoreboardTV"
-        android:layout_width="312dp"
-        android:layout_height="250dp"
+        android:layout_width="288dp"
+        android:layout_height="374dp"
         android:gravity="center"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
         android:text="TextView"
         android:textColor="#FFFFFF"
-        android:textSize="34sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/return_home_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/winnerNameTV" />
+        app:layout_constraintTop_toBottomOf="@+id/winnerNameTV"
+        app:layout_constraintVertical_bias="0.503" />
 
     <Button
         android:id="@+id/return_home_btn"
@@ -53,9 +58,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="40dp"
         android:width="400dp"
         android:height="75dp"
         android:insetLeft="32dp"
@@ -69,5 +75,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreboardTV" />
 </androidx.constraintlayout.widget.ConstraintLayout>
