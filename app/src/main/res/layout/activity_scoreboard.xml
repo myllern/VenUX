@@ -41,7 +41,7 @@
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbars="vertical"
-        android:text="TextView"
+        android:text="@string/textview"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
