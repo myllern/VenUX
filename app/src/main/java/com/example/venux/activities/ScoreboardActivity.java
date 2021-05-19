@@ -26,7 +26,7 @@ public class ScoreboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scoreboard);
 
         winnerNameTV = findViewById(R.id.winnerNameTV);
-        winnerNameTV.setText(GameController.getCurrentPlayer().getName());
+        winnerNameTV.setText("#" + GameController.getCurrentPlayer().getName());
         scoreboardTV = findViewById(R.id.scoreboardTV);
 
         StringBuilder sb = new StringBuilder();
