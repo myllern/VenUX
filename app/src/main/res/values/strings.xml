@@ -35,5 +35,6 @@
     <string name="get_ready_display">Are you ready?</string>
     <string name="get_ready_Tv">I\'M READY</string>
     <string name="textview">TextView</string>
+    <string name="instruction_desc">TODO</string>
 
 </resources>
