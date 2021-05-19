@@ -25,6 +25,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.295"
-        app:srcCompat="@drawable/Instructions" />
+        app:srcCompat="@drawable/instructions_pos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
