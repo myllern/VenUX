@@ -134,7 +134,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                         v.vibrate(500);
                     }
                     else{
-                        gameInstructionsTV.setText("Did not record correctly");
+                        gameInstructionsTV.setText("You can only record allowed moves. Try again!");
                         v.vibrate(1000);
                     }
 

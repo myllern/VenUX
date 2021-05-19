@@ -5,15 +5,69 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    tools:context=".activities.ScoreboardActivity">
+    tools:context=".activities.ScoreboardActivity"
+    android:background="@drawable/gradient_theme_bg">
 
     <TextView
         android:id="@+id/winnerTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textview"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="64dp"
+        android:text="@string/winnerTV"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/winnerNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textview"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/winnerTV" />
+
+    <TextView
+        android:id="@+id/scoreboardTV"
+        android:layout_width="312dp"
+        android:layout_height="250dp"
+        android:background="@drawable/rounded_shape"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#232323"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/return_home_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/winnerNameTV" />
+
+    <Button
+        android:id="@+id/return_home_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="68dp"
+        android:width="400dp"
+        android:height="75dp"
+        android:insetLeft="32dp"
+        android:insetRight="32dp"
+        android:onClick="continueHome"
+        android:text="@string/return_home_text"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:backgroundTint="#FFFFFF"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

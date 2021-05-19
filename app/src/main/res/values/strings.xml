@@ -19,7 +19,9 @@
     <string name="name_player_1">Player_1</string>
     <string name="add_another_player">Add another player</string>
     <string name="plus">+</string>
+    <string name="winnerTV">WINNER</string>
     <string name="name_player_5">Player 5</string>
+    <string name="return_home_text">CONTINUE</string>
     <string name="name_player_6">Player 6</string>
     <string name="name_player_4">Player 4</string>
     <string name="name_player_3">Player 3</string>

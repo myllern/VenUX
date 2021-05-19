@@ -2,11 +2,12 @@ package com.example.venux.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class NewGame {
 
     private ArrayList<Player> playersAlive;
-    private ArrayList<Player> playersDead;
+    private LinkedList<Player> playersDead;
     private ArrayList<Move> moveList;
     private ArrayList<Move> acceptedMoves;
     private int currentPlayer = 0, currentMove = 0;
@@ -14,7 +15,7 @@ public class NewGame {
 
     public NewGame(ArrayList<Player> initialPlayers) {
         this.playersAlive = initialPlayers;
-        playersDead = new ArrayList<Player>();
+        playersDead = new LinkedList<Player>();
         moveList = new ArrayList<Move>();
         acceptedMoves = new ArrayList<Move>();
         createAcceptedMoves();
@@ -40,7 +41,7 @@ public class NewGame {
     private void killCurrentPlayer() {
         int playerToKill = currentPlayer;
         if(currentPlayer == playersAlive.size() - 1) currentPlayer = 0;
-        playersDead.add(playersAlive.remove(playerToKill));
+        playersDead.addFirst(playersAlive.remove(playerToKill));
         currentMove = 0;
     }
 
@@ -67,6 +68,10 @@ public class NewGame {
         } else {
             currentMove++;
         }
+    }
+
+    public LinkedList<Player> getDeadPlayers() {
+        return playersDead;
     }
 
     public int getCurrentMove() {
@@ -101,7 +106,6 @@ public class NewGame {
         }
         // If we are in move creation state, we add move and move to next player.
         if (isCreateMoveState) {
-            playersAlive.get(currentPlayer).incrementScore();
             if(addMove(otherMove)){
                 nextPlayer();
                 isCreateMoveState = false;

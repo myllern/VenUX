@@ -5,6 +5,7 @@ import com.example.venux.model.NewGame;
 import com.example.venux.model.Player;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class GameController {
 
@@ -33,6 +34,8 @@ public class GameController {
     public static int getAmountOfMoves() {
         return game.getAmountOfMoves();
     }
+
+    public static LinkedList<Player> getDeadPlayrs() { return game.getDeadPlayers(); }
 
     public static Player getCurrentPlayer() {
         return game.getCurrentPlayer();
