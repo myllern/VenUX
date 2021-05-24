@@ -65,10 +65,6 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-        //Disable the go-back button
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
     }
 
     /**
@@ -108,10 +104,6 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
         //Unused
-    }
-
-    @Override
-    public void onBackPressed() {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

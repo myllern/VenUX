@@ -36,14 +36,6 @@ public class PlayerSetupActivity extends AppCompatActivity {
         playerRecyclerView.setAdapter(myAdapter);
         playerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         playerName = findViewById(R.id.playerSetup_addPlayerField);
-
-        //Disable the go-back button
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-    }
-
-    @Override
-    public void onBackPressed() {
     }
 
     private void toastMessage(String message){

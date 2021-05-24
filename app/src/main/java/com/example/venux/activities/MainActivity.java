@@ -21,14 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn_start = findViewById(R.id.main_start_btn);
-
-        //Disable the go-back button
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-    }
-
-    @Override
-    public void onBackPressed() {
     }
 
     public void navToPlayerSetup(View view) {
