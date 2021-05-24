@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -45,6 +48,17 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
     public void startGame(View view){
+        //Check whether 2 or more players are added.
+        if(playerList.size() < 2) {
+            Context context = getApplicationContext();
+            CharSequence text = "You need to play with at least 2 players!";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
+
         GameController.createNewGame(playerList);
         Intent playGame = new Intent(this, PlayGameActivity.class);
         startActivity(playGame);
@@ -57,6 +71,17 @@ public class PlayerSetupActivity extends AppCompatActivity {
 
 
     public void addPlayer(View view){
+        closeKeyboard();
+        if(playerList.size() >= 6) {
+            Context context = getApplicationContext();
+            CharSequence text = "You have reached the maximum amount of players!";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            return;
+        }
+
         String newPlayerName = this.playerName.getText().toString();
         if(newPlayerName.isEmpty()){
             newPlayerName = "Player " + (myAdapter.getItemCount()+1);
@@ -65,6 +90,13 @@ public class PlayerSetupActivity extends AppCompatActivity {
         playerName.setText("");
         Player newPlayer = new Player(newPlayerName);
         playerList.add(newPlayer);
+    }
+
+    private void closeKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = getCurrentFocus();
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 }

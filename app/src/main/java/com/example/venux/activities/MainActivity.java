@@ -28,5 +28,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(playerSetup);
     }
 
+    @Override
+    public void onBackPressed() {
+        //Do nothing
+    }
+
 
 }
