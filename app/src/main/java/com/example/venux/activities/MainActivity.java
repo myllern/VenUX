@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(playerSetup);
     }
 
+    public void navToInstructions(View view) {
+        Intent instructions = new Intent(this, GameFlowActivity.class);
+        startActivity(instructions);
+    }
+
     @Override
     public void onBackPressed() {
         //Do nothing

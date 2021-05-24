@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_theme_bg"
+    android:onClick="navToInstructions"
     tools:context=".activities.MainActivity">
 
     <TextView
@@ -42,11 +43,23 @@
         android:textSize="24sp"
         app:backgroundTint="#FFFFFF"
         app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/instructionbutton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentPlayerTv"
-        app:layout_constraintVertical_bias="0.718" />
+        app:layout_constraintVertical_bias="0.907" />
+
+    <Button
+        android:id="@+id/instructionbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:onClick="navToInstructions"
+        android:text="@string/instructions"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

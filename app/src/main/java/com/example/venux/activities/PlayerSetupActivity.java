@@ -64,12 +64,6 @@ public class PlayerSetupActivity extends AppCompatActivity {
         startActivity(playGame);
     };
 
-    public void goToInstructions(View view){
-        Intent intent = new Intent(this, InstructionsActivity.class);
-        startActivity(intent);
-    };
-
-
     public void addPlayer(View view){
         closeKeyboard();
         if(playerList.size() >= 6) {
@@ -96,6 +90,7 @@ public class PlayerSetupActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
         View view = getCurrentFocus();
+        if(view == null) return;
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 

@@ -28,20 +28,6 @@
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/playerSetup_instruction_btn"
-        android:layout_width="131dp"
-        android:layout_height="42dp"
-        android:onClick="goToInstructions"
-        android:text="@string/playerSetup_instruction"
-        android:textSize="12sp"
-        app:cornerRadius="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerSetup_btn_start"
-        app:layout_constraintVertical_bias="0.466" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="367dp"
