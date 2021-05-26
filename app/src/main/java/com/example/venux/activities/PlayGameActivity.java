@@ -127,6 +127,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 int ticksLeft = (Integer) arg;
                 if (ticksLeft > 0) {
                     //Countdown for create move, not done
+                    v.vibrate(25);
                     gameInstructionsTV.setText("Record move in " + ticksLeft);
                 } else {
                     //Countdown for create move, done
