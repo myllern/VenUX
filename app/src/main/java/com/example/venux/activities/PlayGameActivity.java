@@ -75,7 +75,14 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
     public void readyClick(View view) {
         //TODO: Start countdown timer
         readyButton.setVisibility(View.INVISIBLE);
-        Runnable countDownTimer = new CountdownTimer(this, 1000, 3);
+        Runnable countDownTimer;
+        if(GameController.isCreateMoveState()) {
+            System.out.println("Starting long timer");
+            countDownTimer = new CountdownTimer(this, 1000, 3);
+        } else {
+            System.out.println("Starting short timer.");
+            countDownTimer = new CountdownTimer(this, 500, 3);
+        }
         t1 = new Thread(countDownTimer);
         t1.start();
     }
@@ -83,7 +90,6 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-
         if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             mLastAccelerometer = lowPass(sensorEvent.values.clone(), mLastAccelerometer);
 
@@ -172,7 +178,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 } else {
                     if (bumpNextStep()) {
                         onSuccess();
-                        t1 = new Thread(new CountdownTimer(this, 1000, 3));
+                        t1 = new Thread(new CountdownTimer(this, 500, 3));
                         t1.start();
                     } else {
                         onFailure();
