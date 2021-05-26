@@ -81,7 +81,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
             countDownTimer = new CountdownTimer(this, 1000, 3);
         } else {
             System.out.println("Starting short timer.");
-            countDownTimer = new CountdownTimer(this, 500, 3);
+            countDownTimer = new CountdownTimer(this, 750, 3);
         }
         t1 = new Thread(countDownTimer);
         t1.start();
@@ -179,7 +179,7 @@ public class PlayGameActivity extends AppCompatActivity implements SensorEventLi
                 } else {
                     if (bumpNextStep()) {
                         onSuccess();
-                        t1 = new Thread(new CountdownTimer(this, 500, 3));
+                        t1 = new Thread(new CountdownTimer(this, 750, 3));
                         t1.start();
                     } else {
                         onFailure();
